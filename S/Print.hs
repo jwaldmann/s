@@ -11,7 +11,7 @@ instance IsString Doc where
 
 instance Pretty T where
     pretty t = case t of
-        S -> "S"
+        S -> "s"
         _ -> parens $ fillSep $ map pretty $ spine t
 
 instance Show T where show = show . pretty
