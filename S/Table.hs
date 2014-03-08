@@ -11,6 +11,13 @@ value t = case t of
        va <- value a
        M.lookup (vf,va) trans
 
+complete :: M.Map (Int,Int) Int -> M.Map (Int,Int) Int
+complete t = 
+    let s = succ $ maximum $ M.elems t
+    in  M.fromList $ do
+            p <- [ 0 .. s ] ; q <- [ 0 .. s ] 
+            return ((p,q), M.findWithDefault s (p,q) t)
+
 trans :: M.Map (Int,Int) Int
 trans = M.fromList [((0, 0), 1), ((0,
                            1), 2), ((0, 2), 3), ((0, 3),

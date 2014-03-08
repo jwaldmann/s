@@ -6,6 +6,7 @@ import Text.PrettyPrint.Leijen
 import Data.String
 
 import qualified Data.Map as M
+import qualified Data.Set as S
 
 -- | the printout should be readable
 -- by the instance we get from "deriving Read",
@@ -35,5 +36,8 @@ instance ToDoc a => ToDoc [a] where
 
 instance ( ToDoc k, ToDoc v ) => ToDoc (M.Map k v) where
     toDoc m = "M.fromList" <+> align (toDoc (M.toList m) )
+
+instance ( ToDoc v ) => ToDoc (S.Set v) where
+    toDoc m = "S.fromList" <+> align (toDoc (S.toList m) )
 
 instance IsString Doc where fromString = text
