@@ -6,6 +6,7 @@ import S.Reduce (leftmost)
 
 import qualified Data.Map.Strict as M
 import Control.Monad ( guard )
+import System.IO
 
 build :: Model -> IO Model
 build m = do
@@ -18,10 +19,10 @@ build m = do
             build m'
 
 classify (p,q) t m = do
-    putStrLn "classify" ; print ((p,q),t)
+    putStrLn "classify" ; printf ((p,q),t)
     let handle [] = do
             let i = M.size $ base m
-            putStrLn "fresh" ; print i
+            putStrLn "fresh" ; printf i
             return $ m
                    { base = M.insert i t $ base m
                    , trans = M.insert (p,q) (Just i) $ trans m
@@ -29,7 +30,7 @@ classify (p,q) t m = do
         handle ((k,v): kvs) = 
             if equiv (base m) (con m) (dep m) t v
             then do
-                 putStrLn "equiv" ; print (k,v)
+                 putStrLn "equiv" ; printf (k,v)
                  return $ m { trans = M.insert (p,q) (Just k) $ trans m }
             else do
                  handle kvs 
@@ -69,3 +70,4 @@ data Model = Model { base :: M.Map Int T
 model0 c d = 
    Model { base = M.singleton 0 s , trans = M.empty, con=c,dep=d }
 
+printf x = do print x ; hFlush stdout

@@ -2,7 +2,7 @@ module S.Context where
 
 import S.Type
 
-data Context = This | L T Context | R Context T
+data Context = This | L !T !Context | R !Context !T
     deriving ( Eq, Ord, Show )
 
 contexts :: Int -> [Context]
