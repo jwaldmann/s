@@ -5,7 +5,7 @@ import S.Context
 import S.Reduce (leftmost)
 import S.Normal (normalize)
 
-import Control.Monad.State.Strict
+import Control.Monad.State.Strict ( runState )
 import qualified Data.Map.Strict as M
 import Control.Concurrent.STM
 import Control.Monad ( guard )
@@ -59,8 +59,8 @@ classify (p,q) (Just t) m = do
 
 
 missing m = do
-    (k2,v2) <- M.toList $ base m
     (k1,v1) <- M.toList $ base m
+    (k2,v2) <- M.toList $ base m
     guard $ not $ M.member (k1,k2) $ trans m
     return (k1,k2)
 

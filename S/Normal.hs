@@ -7,6 +7,8 @@ import qualified Data.Map.Strict as M
 
 import qualified Control.Monad.State.Strict as S
 
+normal steps t = S.evalState ( normalize steps t ) M.empty
+
 -- | aggressively normalize the given term.
 -- return Just normalform, or Nothing if it could not be found
 -- with the given recursion depth.

@@ -4,14 +4,12 @@ module S.Print where
 
 import S.Data
 import Text.PrettyPrint.Leijen
-import Data.String
+import S.ToDoc
 
-instance IsString Doc where
-    fromString = text
-
-instance Pretty T where
-    pretty t = case t of
+instance ToDoc T where
+    toDoc t = case t of
         S -> "s"
-        _ -> parens $ fillSep $ map pretty $ spine t
+        _ -> parens $ align $ fillSep $ map toDoc $ spine t
 
-instance Show T where show = show . pretty
+instance Show T where show = show . toDoc
+
