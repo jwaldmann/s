@@ -2,6 +2,7 @@ module S.Table where
 
 import S.Type
 import qualified Data.Map as M
+import Data.Maybe (isJust)
 
 value :: T -> Maybe Int
 value t = case t of
@@ -10,6 +11,9 @@ value t = case t of
        vf <- value f
        va <- value a
        M.lookup (vf,va) trans
+
+normalizing :: T -> Bool
+normalizing t = isJust $ value t
 
 complete :: M.Map (Int,Int) Int -> M.Map (Int,Int) Int
 complete t = 

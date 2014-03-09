@@ -2,7 +2,7 @@ module S.Data where
 
 import Data.Hashable
 
-data T = S | App { _hash :: ! Int, fun :: ! T, arg :: ! T }
+data T = S | App { _hash :: ! Int, _size :: ! Int, fun :: ! T, arg :: ! T }
     deriving ( Eq, Ord )
 
 fold :: a -> (a -> a -> a) -> T -> a
@@ -12,7 +12,9 @@ fold s a t = case t of
 
 class Size t where size :: t -> Int
 
-instance Size T where size = fold 1 (+)
+instance Size T where 
+    -- size =  fold 1 (+)
+    size t = case t of S -> 1 ; App {} -> _size t
     
 terms :: [[T]]
 terms = [] : [s] : do
@@ -39,7 +41,7 @@ a :: T
 a = app t s
 
 app :: T -> T -> T
-app x y = App { fun = x, arg = y, _hash = hash (x, y) }
+app x y = App { fun = x, arg = y, _hash = hash (x, y), _size = size x + size y }
 
 spine :: T -> [T]
 spine t = spine_with [] t
