@@ -9,9 +9,9 @@ import qualified Control.Monad.State.Strict as S
 
 -- | compute the normal form by innermost reduction.
 -- this will diverge if argument has no normal form.
-plain t = case t of
+normalform t = case t of
     S -> S
-    App{fun=f,arg=a} -> plapp (plain f) (plain a)
+    App{fun=f,arg=a} -> plapp (normalform f) (normalform a)
 
 -- | find normal form for application where fun and arg are in nf already
 plapp f z = case f of

@@ -31,8 +31,10 @@ plain t =
             _ -> []
     in  f $ spine t
 
+normalform = last . plain
 
 normal steps t = S.evalState ( normalize steps t ) M.empty
+
 
 -- | aggressively head-normalize the given term.
 -- return Just normalform, or Nothing if it could not be found
