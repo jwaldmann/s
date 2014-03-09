@@ -23,6 +23,14 @@ isq t = let S: xs = spine t in case xs of
     [x] -> isq x
     _ -> True
 
+-- | actual head reduction, no cache, no shortcuts
+plain :: T -> [ T ]
+plain t = 
+    let f xs = unspine xs : case xs of
+            S : x : y : z : rest -> f $ spine x ++ z : app y z : rest
+            _ -> []
+    in  f $ spine t
+
 
 normal steps t = S.evalState ( normalize steps t ) M.empty
 
