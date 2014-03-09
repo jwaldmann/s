@@ -24,7 +24,7 @@ check_normalization = do
         hFlush stdout
 
 write_head_table = do
-    m0 <- model0 7 100
+    m0 <- model0 7 80
     m1 <- build_head m0
     print $ toDoc $ base m1
     print $ toDoc $ S.Model.trans m1
