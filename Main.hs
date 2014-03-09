@@ -14,13 +14,15 @@ import System.IO
 
 main = do
     -- print_labelled
+    print_labelled_head
     -- write_head_table
     -- check_head_normalization
     -- find_head_monster
-    find_normal_monster
+    -- find_normal_monster
+    -- check_forward_closed_head TH.trans
 
-print_labelled = do
-    local S.Table.trans
+print_labelled = local S.Table.trans
+print_labelled_head = local TH.trans
 
 check_normalization = do
     forM_ (concat terms) $ \ t -> do
@@ -40,7 +42,7 @@ find_normal_monster = do
     top <- atomically $ newTVar 0
     forM_ (concat terms) $ \ t -> 
         when (S.Table.normalizing t) $ do
-            let n = S.Normal.plain t
+            let n = S.Normal.normalform t
             up <- atomically $ do
                 s <- readTVar top
                 let up = size n > s 
