@@ -7,6 +7,23 @@ import qualified Data.Map.Strict as M
 
 import qualified Control.Monad.State.Strict as S
 
+-- | member of the set Q Q Q,
+-- consequently, t has infinite head reduction
+isq3 t = case t of
+    App {fun=xy, arg=z} | isq z -> case xy of
+        App {fun=x, arg=y} | isq x && isq y -> True
+        _ -> False 
+    _ -> False
+
+-- | member of the set Q.
+--  where P = S/S, Q = M - P,
+--  alternatively,  t  has some subterm with left depht > 1
+isq t = let S: xs = spine t in case xs of
+    [] -> False
+    [x] -> isq x
+    _ -> True
+
+
 normal steps t = S.evalState ( normalize steps t ) M.empty
 
 -- | aggressively head-normalize the given term.
@@ -25,6 +42,7 @@ cached_fix f s t = do
             S.modify $ \ m -> M.insert t res m
             return res
 
+norm self t | isq3 t = return Nothing
 norm self t = case t of
     S -> return $ Just s
     App {fun=f,arg=a} -> do
