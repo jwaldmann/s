@@ -13,18 +13,16 @@ import Data.Maybe (isNothing)
 import System.IO 
 
 main = do
-    -- print_labelled
-    print_labelled_head
-    -- print_labelled_top
+    -- local S.Table.trans
+    -- local_head TH.trans
+
     -- write_head_table
     -- check_head_normalization
     -- find_head_monster
     -- find_normal_monster
-    -- check_forward_closed_head TH.trans
 
-print_labelled = local S.Table.trans
-print_labelled_head = local_head TH.trans
--- print_labelled_top = local_top TH.trans
+    check_forward_closed_head TH.trans
+
 
 check_normalization = do
     forM_ (concat terms) $ \ t -> do
