@@ -20,3 +20,4 @@ here t = case t of
         [ app (app x z) (app y z) ]
     _ -> []
 
+isnormal = null . next

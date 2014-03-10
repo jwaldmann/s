@@ -1,6 +1,7 @@
 import S.Type
 import S.Model
 import S.ToDoc
+import S.Reduce (isnormal)
 import S.Table
 import qualified S.TableHead as TH
 import qualified S.Normal
@@ -8,6 +9,7 @@ import qualified S.Head
 import S.Verify
 
 import Control.Monad ( forM_, when )
+import qualified Data.Map as M
 import Control.Concurrent.STM
 import Data.Maybe (isNothing)
 import System.IO 
@@ -21,8 +23,17 @@ main = do
     -- find_head_monster
     -- find_normal_monster
 
-    check_forward_closed_head TH.trans
+    -- check_forward_closed_head TH.trans
+    equiv_examples 
 
+equiv_examples = do
+    let handle m (t:ts) = do
+            let v = TH.value t
+            case M.lookup v m of
+                Nothing -> return ()
+                Just others -> print (v,  toDoc $ t : others)
+            handle (M.insertWith (++) v [t] m) ts
+    handle M.empty $ filter isnormal $ concat terms
 
 check_normalization = do
     forM_ (concat terms) $ \ t -> do

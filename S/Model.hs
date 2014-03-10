@@ -11,7 +11,7 @@ import Control.Monad.State.Strict ( runState, State )
 import qualified Data.Map.Strict as M
 import qualified Data.Set as S
 import Control.Concurrent.STM
-import Control.Monad ( guard )
+import Control.Monad ( guard, when )
 import Data.Maybe (isJust)
 import System.IO
 
@@ -87,6 +87,10 @@ equiv lize m t1 t2 =
     forall ([0 .. con m] >>= contexts) $ \ con -> do
         n1 <- norma lize m $ plugin con t1 
         n2 <- norma lize m $ plugin con t2 
+
+        when ( isJust n1 /= isJust n2 ) 
+             $ error $ show (con, plugin con t1,plugin con t2)
+
         return $ isJust n1 == isJust n2
 
 
