@@ -14,14 +14,17 @@ invert m = M.fromListWith (++) $ (0, [Nothing]) : do
 
 au = invert $ complete trans
 
+-- | non-normalizing terms, increasing size
+nono = concat $ generate au M.! 38
+
 type TS = [[T]] -- | by increasing size, starting with 0
 
 -- | for each state, a lazy list of terms
 -- that are accepted in that state.
 generate :: M.Map Int  [Maybe (Int,Int)]
          -> M.Map Int [[T]]
-generate au = 
-    let m = M.fromList $ do
+generate au = m 
+    where m =  M.fromList $ do
             r <- M.keys au
             let series = unions $ do
                     v <- au M.! r
@@ -30,7 +33,6 @@ generate au =
                         Just (p,q) -> 
                            [] : crosses app (m M.! p) (m M.! q)
             return (r, series)
-    in  m
 
 unions = foldr union []
 

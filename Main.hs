@@ -7,6 +7,7 @@ import qualified S.TableHead as TH
 import qualified S.Normal
 import qualified S.Head
 import S.Verify
+import S.Back
 
 import Control.Monad ( forM_, when )
 import qualified Data.Map as M
@@ -15,16 +16,21 @@ import Data.Maybe (isNothing)
 import System.IO 
 
 main = do
+    print_multi_origins
     -- local S.Table.trans
     -- local_head TH.trans
 
-    write_head_table
+    -- write_head_table
     -- check_head_normalization
     -- find_head_monster
     -- find_normal_monster
 
     -- check_forward_closed_head TH.trans
     -- equiv_examples 
+
+print_multi_origins = forM_ multi_origins $ \ (t,os) -> do
+     print (t, toDoc os)
+
 
 equiv_examples = do
     let handle m (t:ts) = do
