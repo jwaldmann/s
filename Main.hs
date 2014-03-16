@@ -18,13 +18,13 @@ main = do
     -- local S.Table.trans
     -- local_head TH.trans
 
-    -- write_head_table
+    write_head_table
     -- check_head_normalization
     -- find_head_monster
     -- find_normal_monster
 
     -- check_forward_closed_head TH.trans
-    equiv_examples 
+    -- equiv_examples 
 
 equiv_examples = do
     let handle m (t:ts) = do

@@ -88,7 +88,7 @@ equiv lize m t1 t2 =
         n1 <- norma lize m $ plugin con t1 
         n2 <- norma lize m $ plugin con t2 
 
-        when ( isJust n1 /= isJust n2 ) 
+        when (False && ( isJust n1 /= isJust n2 ) )
              $ error $ show (con, plugin con t1,plugin con t2)
 
         return $ isJust n1 == isJust n2
