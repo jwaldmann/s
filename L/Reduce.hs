@@ -13,7 +13,8 @@ find = -- forM_ (concat S.terms) $ \ t -> when (S.normalizing t) $ do
         let (pre, post) = splitAt 500 $ imo $ froms t
             s = size $ last pre
         when ( s > 10^6  ) $ do
-            printf ( t, length pre, s )
+            printf ( t, length pre )
+            forM_ (map size pre) $ \ s -> do hPutStr stdout (show s ++ " ") ; hFlush stdout
 
 printf x = do print x ; hFlush stdout
 
@@ -32,6 +33,8 @@ next t = ( case t of
 
 here :: L -> [L]
 here t = case t of
+    App {fun=App{fun=App{fun=f,arg=x},arg=y},arg=z} | f == the_s ->
+         [app (app x z)(app y z)]
     App {fun=Lam{body=b},arg=a} -> [ subst 0 a b ]
     _ -> []
 
