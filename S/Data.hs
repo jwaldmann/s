@@ -1,5 +1,6 @@
 module S.Data where
 
+import S.Size
 import Data.Hashable
 
 data T = S | App { _hash :: ! Int, _size :: ! Int, fun :: ! T, arg :: ! T }
@@ -9,8 +10,6 @@ fold :: a -> (a -> a -> a) -> T -> a
 fold s a t = case t of
     S -> s
     App {fun=x,arg=y} -> a (fold s a x) (fold s a y)
-
-class Size t where size :: t -> Int
 
 instance Size T where 
     -- size =  fold 1 (+)
