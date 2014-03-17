@@ -2,6 +2,26 @@ module L.Reduce where
 
 import L.Type
 
+import qualified S.Type as S
+import qualified S.Table as S
+
+import Control.Monad ( forM_, when )
+import System.IO 
+
+find = forM_ (concat S.terms) $ \ t -> 
+    when (S.normalizing t) $ do
+        let ts = imo $ froms t
+            s = size $ last ts
+        if ( not $ null $ drop 300 ts ) 
+        then do
+             printf t
+             printf $ map size ts
+        else do 
+             when (s > 10^6) $ printf ( t, length ts, s )
+        hFlush stdout
+
+printf x = do print x ; hFlush stdout
+
 imo :: L -> [L]
 imo t = t : case next t of
     [] -> []
