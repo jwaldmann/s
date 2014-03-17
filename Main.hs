@@ -3,6 +3,7 @@ import S.Size
 import S.Model
 import S.ToDoc
 import S.Reduce (isnormal)
+import qualified S.Reduce 
 import S.Table
 import qualified S.TableHead as TH
 import qualified S.Normal
@@ -18,7 +19,10 @@ import Data.Maybe (isNothing)
 import System.IO 
 
 main = do
-    L.Reduce.find
+    S.Reduce.find_maxpipe
+ 
+    -- L.Reduce.find_deep_vars
+    -- L.Reduce.find_weak_strong
     -- print_multi_origins
     -- local S.Table.trans
     -- local_head TH.trans

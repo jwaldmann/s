@@ -8,7 +8,11 @@ import qualified S.Table as S
 import Control.Monad ( forM_, when )
 import System.IO 
 
-find = -- forM_ (concat S.terms) $ \ t -> when (S.normalizing t) $ do
+find_deep_vars = forM_ (concat S.terms) $ \ t -> do
+    let (pre,post) = splitAt 200 $ omo $ froms t
+    printf (t, length pre, maximum $ do Var i <- pre >>= subterms ; return i )
+
+find_weak_strong = -- forM_ (concat S.terms) $ \ t -> when (S.normalizing t) $ do
     forM_ (concat S.normalforms) $ \ t -> do
         let (pre, post) = splitAt 500 $ imo $ froms t
             s = size $ last pre
@@ -19,17 +23,31 @@ find = -- forM_ (concat S.terms) $ \ t -> when (S.normalizing t) $ do
 printf x = do print x ; hFlush stdout
 
 imo :: L -> [L]
-imo t = t : case next t of
+imo t = t : case next_imo t of
     [] -> []
     s : _ -> imo s
 
-next :: L -> [L]
-next t = ( case t of
-     App {fun=f,arg=a} -> map (\a'-> app f a') (next a)
-                       ++ map (\f'-> app f' a) (next f)
-     Lam {body=b} -> map lam $ next b
+
+next_imo :: L -> [L]
+next_imo t = ( case t of
+     App {fun=f,arg=a} -> map (\a'-> app f a') (next_imo a)
+                       ++ map (\f'-> app f' a) (next_imo f)
+     Lam {body=b} -> map lam $ next_imo b
      _ -> [] 
     ) ++ here t
+
+omo :: L -> [L]
+omo t = t : case next_omo t of
+    [] -> []
+    s : _ -> omo s
+
+next_omo :: L -> [L]
+next_omo t = here t ++ ( case t of
+     App {fun=f,arg=a} -> map (\a'-> app f a') (next_omo a)
+                       ++ map (\f'-> app f' a) (next_omo f)
+     Lam {body=b} -> map lam $ next_omo b
+     _ -> [] 
+    ) 
 
 here :: L -> [L]
 here t = case t of

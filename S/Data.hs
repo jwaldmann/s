@@ -6,6 +6,12 @@ import Data.Hashable
 data T = S | App { _hash :: ! Int, _size :: ! Int, fun :: ! T, arg :: ! T }
     deriving ( Eq, Ord )
 
+subterms :: T -> [T]
+subterms t = t : case t of
+    App {fun=f,arg=a} -> [f,a] >>= subterms
+    _ -> []
+
+
 fold :: a -> (a -> a -> a) -> T -> a
 fold s a t = case t of
     S -> s

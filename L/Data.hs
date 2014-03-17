@@ -21,6 +21,12 @@ lam b = Lam { _hash = hash (42 :: Int,b) , _size = 1 + size b , body = b }
 
 the_s = lam $ lam $ lam $ app (app (var 2) (var 0)) (app (var 1) (var 0))
 
+subterms :: L -> [L]
+subterms t = t : case t of
+    App {fun=f,arg=a} -> [f,a] >>= subterms
+    Lam {body=b} -> subterms b
+    _ -> []
+
 instance Hashable L where
     hashWithSalt s t = hashWithSalt s $ case t of
         Var i -> hashWithSalt 314159 i

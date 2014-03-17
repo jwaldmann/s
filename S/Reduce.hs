@@ -2,6 +2,11 @@ module S.Reduce where
 
 import S.Type
 
+import Control.Monad ( forM_, when )
+import Control.Applicative ( (<$>) )
+
+import System.IO
+
 leftmost :: T -> [T]
 leftmost t = t : case next t of
     [] -> []
@@ -21,3 +26,18 @@ here t = case t of
     _ -> []
 
 isnormal = null . next
+
+
+pipe :: T -> Int
+pipe t = case t of
+    App{fun=f,arg=a} | f == s -> succ $ pipe a
+    _ -> 0
+
+maxpipe t = maximum $ do s <- subterms t ; return $ pipe s
+
+find_maxpipe = forM_ ( concat terms ) $ \ t -> do
+    let (pre,post) = splitAt 100 $ leftmost t
+        m = maximum $ pipe <$> ( pre >>= subterms )
+    when (maxpipe t + 3 <= m) $ do
+        print (t, maxpipe t, m )
+    hFlush stdout
