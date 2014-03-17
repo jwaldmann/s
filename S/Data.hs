@@ -24,6 +24,15 @@ terms = [] : [s] : do
         y <- terms !! sr
         return $ app x y
 
+normalforms :: [[T]]
+normalforms = []: [s] : do 
+    z <- [2..]
+    return $ 
+         map (\ n -> unspine [s,n] ) (normalforms !! (z-1))
+      ++ do zl <- [1..z-2] ; let zr = z - 1 - zl
+            x <- normalforms !! zl ; y <- normalforms !! zr
+            return $ unspine [s,x,y]
+
 
 instance Hashable T where
     hashWithSalt s t = hashWithSalt s $ case t of

@@ -8,17 +8,12 @@ import qualified S.Table as S
 import Control.Monad ( forM_, when )
 import System.IO 
 
-find = forM_ (concat S.terms) $ \ t -> 
-    when (S.normalizing t) $ do
-        let ts = imo $ froms t
-            s = size $ last ts
-        if ( not $ null $ drop 300 ts ) 
-        then do
-             printf t
-             printf $ map size ts
-        else do 
-             when (s > 10^6) $ printf ( t, length ts, s )
-        hFlush stdout
+find = -- forM_ (concat S.terms) $ \ t -> when (S.normalizing t) $ do
+    forM_ (concat S.normalforms) $ \ t -> do
+        let (pre, post) = splitAt 500 $ imo $ froms t
+            s = size $ last pre
+        when ( s > 10^6  ) $ do
+            printf ( t, length pre, s )
 
 printf x = do print x ; hFlush stdout
 
