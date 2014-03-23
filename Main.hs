@@ -11,6 +11,7 @@ import qualified S.Head
 import S.Verify
 import S.Back
 import qualified L.Reduce
+import qualified L.Eval
 
 import Control.Monad ( forM_, when )
 import qualified Data.Map as M
@@ -19,8 +20,8 @@ import Data.Maybe (isNothing)
 import System.IO 
 
 main = do
-    S.Reduce.find_maxpipe
- 
+    -- S.Reduce.find_maxpipe
+    L.Eval.find_monster
     -- L.Reduce.find_deep_vars
     -- L.Reduce.find_weak_strong
     -- print_multi_origins

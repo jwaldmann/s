@@ -1,21 +1,39 @@
 module L.Eval where
 
-import qualified S.Type as T
+import qualified S.Type as S
 
 -- import qualified Control.Monad.State.Strict as S
 import qualified Control.Monad.Writer as W
 import Control.Monad ( foldM )
 
+
+import Control.Concurrent.STM
+
+import Control.Monad ( forM_, when )
+import System.IO 
+
+find_monster = do
+    top <- atomically $ newTVar 0
+    forM_ (concat S.terms) $ \ t -> do   
+        best <- atomically $ readTVar top
+        case eval (10^3) t of
+            Nothing -> when False $ printf (t, "*")
+            Just (n,s) -> when ( s >= best ) $ do
+                printf (t,(n,s))
+                atomically $ writeTVar top s
+
+printf x = do print x ; hFlush stdout
+
 -- | size of beta-normal form (if reached by s innermost steps)
-eval :: Int -> T.T -> Maybe Int
+eval :: Int -> S.T -> Maybe (Int,Int)
 eval s t = 
     let (a,w) = W.runWriter ( build t >>= measure )
-    in  if null $ drop s w then Just a else Nothing
+    in  if null $ drop s w then Just (length w, a) else Nothing
 
 build t = case t of
-    T.S {} -> return s
-    T.App {} -> do 
-       f <- build $ T.fun t ; a <- build $ T.arg t ; app f a
+    S.S {} -> return s
+    S.App {} -> do 
+       f <- build $ S.fun t ; a <- build $ S.arg t ; app f a
 
 data Val = Fun { unFun :: ! (Val -> W.Writer [()] Val) }
          | Val { unVal :: ! Int } 
