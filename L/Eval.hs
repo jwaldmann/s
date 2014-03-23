@@ -16,7 +16,7 @@ find_monster = do
     top <- atomically $ newTVar 0
     forM_ (concat S.terms) $ \ t -> do   
         best <- atomically $ readTVar top
-        case eval (10^3) t of
+        case eval (2 * 10^3) t of
             Nothing -> when False $ printf (t, "*")
             Just (n,s) -> when ( s >= best ) $ do
                 printf (t,(n,s))
@@ -25,7 +25,7 @@ find_monster = do
 printf x = do print x ; hFlush stdout
 
 -- | size of beta-normal form (if reached by s innermost steps)
-eval :: Int -> S.T -> Maybe (Int,Int)
+eval :: Int -> S.T -> Maybe (Int,Integer)
 eval s t = 
     let (a,w) = W.runWriter ( build t >>= measure )
     in  if null $ drop s w then Just (length w, a) else Nothing
@@ -36,7 +36,7 @@ build t = case t of
        f <- build $ S.fun t ; a <- build $ S.arg t ; app f a
 
 data Val = Fun { unFun :: ! (Val -> W.Writer [()] Val) }
-         | Val { unVal :: ! Int } 
+         | Val { unVal :: ! Integer } 
 
 s = Fun $ \ x -> return $ Fun $ \ y -> return $ Fun $ \ z -> 
     -- app (app x z) (app y z)
