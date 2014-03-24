@@ -10,6 +10,11 @@ import Control.Concurrent.STM
 import Control.Monad ( forM_, when )
 import System.IO 
 
+normalize steps t = do
+    case eval steps t of
+        Just (n,s) -> return $ Just t
+        Nothing -> return Nothing
+
 find_monster = do
     top <- atomically $ newTVar 0
 --    forM_ (concat S.terms) $ \ t -> do   

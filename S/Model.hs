@@ -6,6 +6,7 @@ import S.Reduce (leftmost)
 
 import qualified S.Normal
 import qualified S.Head
+import qualified L.Eval
 
 import Control.Monad.State.Strict ( runState, State )
 import qualified Data.Map.Strict as M
@@ -19,6 +20,7 @@ type Normalize = Int -> T -> State (M.Map T (Maybe T)) (Maybe T)
 
 build_full = build S.Normal.normalize
 build_head = build S.Head.normalize
+build_beta_full = build L.Eval.normalize
 
 build :: Normalize -> Model -> IO Model
 build normalize m = do

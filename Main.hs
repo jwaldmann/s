@@ -20,8 +20,11 @@ import Data.Maybe (isNothing)
 import System.IO 
 
 main = do
+
+    write_beta_table 
+    -- L.Eval.find_monster
+
     -- S.Reduce.find_maxpipe
-    L.Eval.find_monster
     -- L.Reduce.find_deep_vars
     -- L.Reduce.find_weak_strong
     -- print_multi_origins
@@ -90,6 +93,13 @@ find_head_monster = do
 write_head_table = do
     m0 <- model0 8 200
     m1 <- build_head m0
+    print $ toDoc $ base m1
+    print $ toDoc $ S.Model.trans m1
+    print $ toDoc $ S.Model.accept m1
+
+write_beta_table = do
+    m0 <- model0 6 1000
+    m1 <- build_beta_full m0
     print $ toDoc $ base m1
     print $ toDoc $ S.Model.trans m1
     print $ toDoc $ S.Model.accept m1
