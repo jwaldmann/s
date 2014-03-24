@@ -17,17 +17,28 @@ build t = case t of
     S.S {} -> s
     S.App {S.fun = f, S.arg = a} -> app (build f) (build a)
 
-data Val = Fun { unFun :: ! (Val -> Val) }
-         | Val { unVal :: ! Integer } 
-
 s = Fun $ \ x -> Fun $ \ y -> Fun $ \ z -> 
     app (app x z) (app y z)
 
+-- | the Val type represents semantics for (head?) normal forms:
+data Val = Fun   (Val -> Val) 
+             -- ^ a normal form of shape (\ x -> b)
+         | Val   Integer 
+             -- ^ a normal form of shape (Var .. .. ..)
 
+app :: Val -> Val -> Val
 app (Fun f) a = f a
+-- size: ( where the application operator is not counted )
 app (Val s) a = Val $ s + measure a
-    -- the application operator is not counted
+-- depth:
+-- app (Val s) a = Val $ succ $ max s $ measure a
 
+
+-- | the size of a term. 
+-- to evaluate the size of an abstraction,
+-- we apply it (its semantics) 
+-- to (a semantics object that represents) a variable.
+measure :: Val -> Integer
 measure (Val s) = s
 measure (Fun f) = succ -- this counts 1 for the lambda
     $ measure $ f (Val 1) -- this counts one for the variable
