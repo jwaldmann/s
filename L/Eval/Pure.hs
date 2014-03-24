@@ -21,9 +21,9 @@ s = Fun $ \ x -> Fun $ \ y -> Fun $ \ z ->
     app (app x z) (app y z)
 
 -- | the Val type represents semantics for (head?) normal forms:
-data Val = Fun   (Val -> Val) 
+data Val = Fun   (Val -> Val ) 
              -- ^ a normal form of shape (\ x -> b)
-         | Val   Integer 
+         | Val  Integer
              -- ^ a normal form of shape (Var .. .. ..)
 
 app :: Val -> Val -> Val
