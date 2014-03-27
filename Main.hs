@@ -12,6 +12,7 @@ import S.Verify
 import S.Back
 import qualified L.Reduce
 import qualified L.Eval
+import qualified L.Convert
 
 import Control.Monad ( forM_, when )
 import qualified Data.Map as M
@@ -20,8 +21,8 @@ import Data.Maybe (isNothing)
 import System.IO 
 
 main = do
-
-    write_beta_table 
+    L.Convert.find_convertible_normalforms
+    -- write_beta_table 
     -- L.Eval.find_monster
 
     -- S.Reduce.find_maxpipe
