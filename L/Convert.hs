@@ -29,7 +29,7 @@ find_convertible_normalforms = do
 
                         -- print n
                 work (M.insert n t m) ts
-    work M.empty $ concat S.normalforms
+    work M.empty $ concat $ drop 10 $ S.normalforms
 
 
 extract_context_saturate (t0,t1) = do
