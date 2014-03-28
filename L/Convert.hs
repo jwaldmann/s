@@ -41,11 +41,13 @@ extract_context_saturate (t0,t1) = do
             else if a0 == a1 then do
                 putStrLn "common right context"
                 extract_context_saturate (f0,f1)
-            else compare_saturate 1 (t0,t1)
+            else compare_saturate 0 (t0,t1)
 
 
 compare_saturate i (s,t) | i < 5 = do
-    putStr "compare" ; print (s,t)
+    putStr $ "compare+" ++ show i ++ ": "
+    print1 (s , t)
+    hFlush stdout
     let [a,b] = map ( normal 1000 ) [ s,t]
     case (a,b) of
         (Just x, Just y) -> 
@@ -55,7 +57,8 @@ compare_saturate i (s,t) | i < 5 = do
         _ -> putStrLn "diverges"
 compare_saturate _ _ = putStrLn "cannot eat argument"
 
+print1 x = putStrLn $ unwords $ words $ show x
 
-nf t = case splitAt 70 $ imo $ L.froms t of
+nf t = case splitAt 60 $ imo $ L.froms t of
             ( ts, [] ) -> Just $ last ts
             _ -> Nothing
