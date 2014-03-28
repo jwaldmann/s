@@ -10,8 +10,8 @@ import qualified Control.Monad.State.Strict as S
 -- | compute the normal form by innermost reduction.
 -- this will diverge if argument has no normal form.
 normalform t = case t of
-    S -> S
     App{fun=f,arg=a} -> plapp (normalform f) (normalform a)
+    _ -> t
 
 -- | find normal form for application where fun and arg are in nf already
 plapp f z = case f of
@@ -40,7 +40,6 @@ cached_fix f s t = do
             return res
 
 norm self t = case t of
-    S -> return $ Just s
     App {fun=f,arg=a} -> do
         nf <- self f
         case nf of
@@ -54,4 +53,5 @@ norm self t = case t of
                          case here t1 of
                              [] -> return $ Just t1
                              t2 : _ -> self t2
+    _ -> return $ Just t
                           

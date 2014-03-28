@@ -3,7 +3,9 @@ module S.Data where
 import S.Size
 import Data.Hashable
 
-data T = S | App { _hash :: ! Int, _size :: ! Int, fun :: ! T, arg :: ! T }
+data T = S 
+       | App { _hash :: ! Int, _size :: ! Int, fun :: ! T, arg :: ! T }
+       | Var { _hash :: ! Int, idx :: ! Int }
     deriving ( Eq, Ord )
 
 subterms :: T -> [T]
@@ -18,8 +20,7 @@ fold s a t = case t of
     App {fun=x,arg=y} -> a (fold s a x) (fold s a y)
 
 instance Size T where 
-    -- size =  fold 1 (+)
-    size t = case t of S -> 1 ; App {} -> _size t
+    size t = case t of App {} -> _size t ; _ -> 1
     
 terms :: [[T]]
 terms = [] : [s] : do
@@ -43,6 +44,7 @@ normalforms = []: [s] : do
 instance Hashable T where
     hashWithSalt s t = hashWithSalt s $ case t of
         S -> 314159
+        Var {} -> _hash t
         App {} -> _hash t
 
 s :: T
@@ -54,6 +56,9 @@ t = app s s
 a :: T
 a = app t s
 
+var :: Int -> T
+var i = Var { _hash = hash (271828 :: Int, i), idx = i }
+
 app :: T -> T -> T
 app x y = App { fun = x, arg = y, _hash = hash (x, y), _size = size x + size y }
 
@@ -61,8 +66,8 @@ spine :: T -> [T]
 spine t = spine_with [] t
 
 spine_with ts t = case t of
-    S -> t : ts
     App {fun=f, arg=a} -> spine_with (a:ts) f
+    _ -> t : ts
 
 unspine :: [T] -> T
 unspine (t : ts) = foldl app t ts
