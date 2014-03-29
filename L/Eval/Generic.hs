@@ -15,6 +15,7 @@ depth :: Algebra Integer
 depth = Algebra 
       { var = 0, lam = succ, app = \ f a -> succ $ max f a }
 
+-- | (left depth of this term, max left depth of subterms)
 max_left_depth :: Algebra (Int, Int)
 max_left_depth = Algebra
      { var = (0,0)

@@ -18,11 +18,12 @@ find_convertible_normalforms = do
                 -- print (t, n)
                 putStr "." ; hFlush stdout
                 case M.lookup n m of
-                    Nothing -> work (M.insert n t m) ts
+                    Nothing -> return ()
                     Just t0 -> do
                         print (t0, t, n)
+                work (M.insert n t m) ts
     work M.empty $ concat S.normalforms
 
-nf t = case splitAt 60 $ imo $ S.froms t of
+nf t = case splitAt 70 $ imo $ S.froms t of
             ( ts, [] ) -> Just $ last ts
             _ -> Nothing

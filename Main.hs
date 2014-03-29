@@ -10,18 +10,22 @@ import qualified S.Normal
 import qualified S.Head
 import S.Verify
 import S.Back
+import L.Type ( froms )
 import qualified L.Reduce
 import qualified L.Eval
+import qualified L.Eval.Monadic as M
+import qualified L.Eval.Generic as G
 import qualified L.Convert
 
 import Control.Monad ( forM_, when )
 import qualified Data.Map as M
 import Control.Concurrent.STM
-import Data.Maybe (isNothing)
+import Data.Maybe (isNothing, isJust)
 import System.IO 
 
 main = do
-    L.Convert.find_convertible_normalforms
+    find_max_left
+    -- L.Convert.find_convertible_normalforms
     -- write_beta_table 
     -- L.Eval.find_monster
 
@@ -40,9 +44,22 @@ main = do
     -- check_forward_closed_head TH.trans
     -- equiv_examples 
 
+find_max_left = do
+    let work top (t:ts) = 
+            case M.eval 1000 t of
+               Just e -> do
+                let (h,m) = G.eval G.max_left_depth t
+                when (m > top) $ do
+                    print (t, e, m)
+                    -- print $ last $ L.Reduce.imo $ froms t
+                    -- putStrLn $ take 10 $ show $ last $ L.Reduce.imo $ froms t
+                    hFlush stdout
+                work (max top m) ts
+               Nothing -> work top ts
+    work 0 $ concat S.Type.normalforms
+
 print_multi_origins = forM_ multi_origins $ \ (t,os) -> do
      print (t, toDoc os)
-
 
 equiv_examples = do
     let handle m (t:ts) = do
