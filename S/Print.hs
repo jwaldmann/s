@@ -14,9 +14,10 @@ instance ToDoc T where
         S:S:[] -> "t"
         S:S:rest ->   
             parens $ align $ fillSep $ "t" : map toDoc rest
-        S:[] -> "s"
-        S:rest ->   
-            parens $ align $ fillSep $ "s" : map toDoc rest
+        t:[] -> atom t
+        t : rest -> parens $ align $ fillSep $ atom t :  map toDoc rest
+
+atom t = case t of S -> "s" ; Var{} -> toDoc (idx t) 
 
 instance Show T where show = show . toDoc
 

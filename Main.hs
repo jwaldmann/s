@@ -16,6 +16,7 @@ import qualified L.Eval
 import qualified L.Eval.Monadic as M
 import qualified L.Eval.Generic as G
 import qualified L.Convert
+import qualified L.Pure
 
 import Control.Monad ( forM_, when )
 import qualified Data.Map as M
@@ -24,8 +25,10 @@ import Data.Maybe (isNothing, isJust)
 import System.IO 
 
 main = do
+
     find_max_left
     -- L.Convert.find_convertible_normalforms
+    -- L.Pure.find_pure
     -- write_beta_table 
     -- L.Eval.find_monster
 

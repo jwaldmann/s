@@ -23,6 +23,17 @@ max_left_depth = Algebra
      , app = \ (fh,fm) (ah,am) -> (succ fh, maximum[succ fh,fm,am])
      }
 
+-- | beta-normalform of t is pure?
+pure t = snd $ eval pureA t
+
+-- | fst: is applicative (does not contain lambda)
+-- | snd: is pure = stacked lambda over applicative
+pureA :: Algebra (Bool,Bool)
+pureA = Algebra
+     { var = (True, True)
+     , lam = \(a,p) -> (False,p)
+     , app = \(a1,p1) (a2,p2) -> (a1 && a2, a1 && a2)
+     }
 
 render :: Algebra String
 render = Algebra
