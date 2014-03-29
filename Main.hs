@@ -49,7 +49,7 @@ main = do
 
 find_max_left = do
     let work top (t:ts) = 
-            case M.eval 1000 t of
+            case M.eval 500 t of
                Just e -> do
                 let (h,m) = G.eval G.max_left_depth t
                 when (m > top) $ do
