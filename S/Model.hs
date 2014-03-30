@@ -20,7 +20,7 @@ import System.IO
 type Normalize = Int -> T -> State (M.Map T (Maybe T)) (Maybe T)
 
 write_full_black_table = do
-    m1 <- model1 7 100
+    m1 <- model1 7 77
     mo  <- build S.Normal.normalize m1
     print $ toDoc $ base mo
     print $ toDoc $ trans mo
