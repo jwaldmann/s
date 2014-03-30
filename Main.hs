@@ -25,7 +25,9 @@ import Data.Maybe (isNothing, isJust)
 import System.IO 
 
 main = do
-    compare_cl_beta_normal
+
+    S.Model.write_full_black_table 
+    -- compare_cl_beta_normal
 
     -- find_max_left
     -- find_max_order 

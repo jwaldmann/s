@@ -3,6 +3,7 @@ module S.Model where
 import S.Type
 import S.Context
 import S.Reduce (leftmost)
+import S.ToDoc
 
 import qualified S.Normal
 import qualified S.Head
@@ -17,6 +18,13 @@ import Data.Maybe (isJust)
 import System.IO
 
 type Normalize = Int -> T -> State (M.Map T (Maybe T)) (Maybe T)
+
+write_full_black_table = do
+    m1 <- model1 7 100
+    mo  <- build S.Normal.normalize m1
+    print $ toDoc $ base mo
+    print $ toDoc $ trans mo
+    print $ toDoc $ accept mo
 
 build_full = build S.Normal.normalize
 build_head = build S.Head.normalize
@@ -108,6 +116,16 @@ model0 c d = do
     st <- atomically $ newTVar M.empty
     return $ Model 
          { base = M.singleton 0 s , trans = M.empty, accept = S.empty
+         , state = st
+         , con=c,dep=d 
+         }
+
+-- | basis is { S, black-hole }
+model1 c d = do
+    st <- atomically $ newTVar M.empty
+    return $ Model 
+         { base = M.fromList [( 0, s), (1, var 0) ] 
+         , trans = M.empty, accept = S.empty
          , state = st
          , con=c,dep=d 
          }
