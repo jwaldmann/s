@@ -49,7 +49,7 @@ main = do
     -- check_forward_closed_head TH.trans
     -- equiv_examples 
 
-compare_cl_beta_normal = forM_ ( concat terms ) $ \ t -> do
+compare_cl_beta_normal = forM_ ( concat $ S.Type.normalforms ) $ \ t -> do
     let d = 500
         b = M.eval d t
         c = S.Normal.normal d $ unspine [ t, var 1, var 2, var 3]
