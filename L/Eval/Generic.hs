@@ -23,6 +23,14 @@ max_left_depth = Algebra
      , app = \ (fh,fm) (ah,am) -> (succ fh, maximum[succ fh,fm,am])
      }
 
+-- | (lambda depth of this term, max lambda depth of subterms)
+max_lambda_depth :: Algebra (Int, Int)
+max_lambda_depth = Algebra
+     { var = (0,0)
+     , lam = \ (h,m) -> (succ h, max (succ h) m)
+     , app = \ (fh,fm) (ah,am) -> (0, maximum[fm,am])
+     }
+
 -- | beta-normalform of t is pure?
 pure t = snd $ eval pureA t
 

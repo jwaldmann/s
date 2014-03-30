@@ -25,8 +25,10 @@ import Data.Maybe (isNothing, isJust)
 import System.IO 
 
 main = do
+    compare_cl_beta_normal
 
-    find_max_left
+    -- find_max_left
+    -- find_max_order 
     -- L.Convert.find_convertible_normalforms
     -- L.Pure.find_pure
     -- write_beta_table 
@@ -47,6 +49,14 @@ main = do
     -- check_forward_closed_head TH.trans
     -- equiv_examples 
 
+compare_cl_beta_normal = forM_ ( concat terms ) $ \ t -> do
+    let d = 500
+        b = M.eval d t
+        c = S.Normal.normal d $ unspine [ t, var 1, var 2, var 3]
+    if (isJust b == isJust c) 
+       then do putStr "." ; hFlush stdout
+       else printf (t, isJust b, isJust c)
+
 find_max_left = do
     let work top (t:ts) = 
             case M.eval 500 t of
@@ -54,6 +64,20 @@ find_max_left = do
                 let (h,m) = G.eval G.max_left_depth t
                 when (m > top) $ do
                     print (t, e, m)
+                    -- print $ last $ L.Reduce.imo $ froms t
+                    -- putStrLn $ take 10 $ show $ last $ L.Reduce.imo $ froms t
+                    hFlush stdout
+                work (max top m) ts
+               Nothing -> work top ts
+    work 0 $ concat S.Type.normalforms
+
+find_max_order = do
+    let work top (t:ts) = 
+            case M.eval 500 t of
+               Just e -> do
+                let (h,m) = G.eval G.max_lambda_depth t
+                when (m >= top) $ do
+                    print (t, e, (h,m))
                     -- print $ last $ L.Reduce.imo $ froms t
                     -- putStrLn $ take 10 $ show $ last $ L.Reduce.imo $ froms t
                     hFlush stdout
