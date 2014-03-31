@@ -20,7 +20,7 @@ import System.IO
 type Normalize = Int -> T -> State (M.Map T (Maybe T)) (Maybe T)
 
 write_full_black_table = do
-    m1 <- model1 7 77
+    m1 <- model1 6 30
     mo  <- build S.Normal.normalize m1
     print $ toDoc $ base mo
     print $ toDoc $ trans mo
@@ -70,6 +70,7 @@ classify lize (p,q) (Just t) m = do
                    , accept = if isJust n then S.insert i $ accept m else accept m
                    }
         handle ((k,v): kvs) = do
+            -- putStrLn $ "handle" ++ show (k,v)
             e <- equiv lize m t v
             if e
             then do
@@ -95,6 +96,8 @@ forall (x:xs) f = do
 
 equiv lize m t1 t2 = 
     forall ([0 .. con m] >>= contexts) $ \ con -> do
+        -- print (t1, t2, con)
+
         n1 <- norma lize m $ plugin con t1 
         n2 <- norma lize m $ plugin con t2 
 
