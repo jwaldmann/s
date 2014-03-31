@@ -1,6 +1,7 @@
 module S.Model where
 
 import S.Type
+import qualified S.Cache as C
 import S.Context
 import S.Reduce (leftmost)
 import S.ToDoc
@@ -17,10 +18,10 @@ import Control.Monad ( guard, when )
 import Data.Maybe (isJust)
 import System.IO
 
-type Normalize = Int -> T -> State (M.Map T (Maybe T)) (Maybe T)
+type Normalize = Int -> T -> State C.Cache (Maybe T)
 
 write_full_black_table = do
-    m1 <- model1 6 30
+    m1 <- model1 6 66
     mo  <- build S.Normal.normalize m1
     print $ toDoc $ base mo
     print $ toDoc $ trans mo
@@ -43,42 +44,47 @@ build normalize m = do
 
 norma lize m t = do
     s0 <- atomically $ readTVar $ state m
-    let (n,s1) = runState (lize (dep m) t) s0
-    atomically $ writeTVar (state m) s1
+    let (n,s1) = runState (lize (dep m) t) 
+               $ C.Cache { C.m = s0, C.st = 0 }
+    atomically $ writeTVar (state m) $ C.m s1
     -- putStrLn $ unwords [ "norm", show (M.size s1), show t, show n ]
     return n
 
-normal_classify lize (p,q) t m = do
+normal_classify lize (p,q) t mo = do
     putStrLn "normal_classify" ; printf ((p,q),t)
-    n <- norma lize m t
-    classify lize (p,q) n  m
+    n <- norma lize mo t
+    classify lize (p,q) n mo
 
-classify lize (p,q) Nothing m = do
+mkcache mo = do
+    s <- atomically $ readTVar $ state mo
+    return $ C.Cache { C.m = s, C.st = 0 }
+
+classify lize (p,q) Nothing mo = do
     putStrLn "is non-terminating"
-    return $ m { trans = M.insert (p,q) Nothing $ trans m}
+    return $ mo { trans = M.insert (p,q) Nothing $ trans mo }
 
-classify lize (p,q) (Just t) m = do
+classify lize (p,q) (Just t) mo = do
     putStrLn "classify" ; printf ((p,q),t)
-    n <- norma lize m t
+    n <- norma lize mo t
     printf n
     let handle [] = do
-            let i = M.size $ base m
+            let i = M.size $ base mo
             putStrLn "fresh" ; printf i
-            return $ m
-                   { base = M.insert i t $ base m
-                   , trans = M.insert (p,q) (Just i) $ trans m
-                   , accept = if isJust n then S.insert i $ accept m else accept m
+            return $ mo
+                   { base = M.insert i t $ base mo
+                   , trans = M.insert (p,q) (Just i) $ trans mo
+                   , accept = if isJust n then S.insert i $ accept mo else accept mo
                    }
         handle ((k,v): kvs) = do
             -- putStrLn $ "handle" ++ show (k,v)
-            e <- equiv lize m t v
+            e <- equiv lize mo t v
             if e
             then do
                  putStrLn "equiv" ; printf (k,v)
-                 return $ m { trans = M.insert (p,q) (Just k) $ trans m }
+                 return $ mo { trans = M.insert (p,q) (Just k) $ trans mo }
             else do
                  handle kvs 
-    handle (M.toList $ base m) 
+    handle (M.toList $ base mo ) 
 
 
 missing m = do
@@ -111,7 +117,7 @@ equiv lize m t1 t2 =
 data Model = Model { base :: ! ( M.Map Int T )
                  , trans :: ! ( M.Map (Int,Int) (Maybe Int) )
                  , accept :: ! (S.Set Int)
-                 , state :: TVar ( M.Map T (Maybe T) )
+                 , state :: TVar ( M.Map T (Maybe T))
            , con :: ! Int, dep :: ! Int
              } 
 

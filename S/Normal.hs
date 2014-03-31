@@ -1,11 +1,16 @@
 module S.Normal where
 
 import S.Type
+import S.Size
+import S.Cache
 import S.Reduce (here)
 
 import qualified Data.Map.Strict as M
 
 import qualified Control.Monad.State.Strict as S
+import Control.Monad ( forM )
+
+import Debug.Trace(trace)
 
 -- | compute the normal form by innermost reduction.
 -- this will diverge if argument has no normal form.
@@ -21,25 +26,31 @@ plapp f z = case f of
     S -> app f z
 
 -- | result of at most steps reductions, using cache
-normal steps t = S.evalState ( normalize steps t ) M.empty
+normal steps t = S.evalState ( normalize steps t ) 
+               $ Cache { m = M.empty, st = steps }
+
 
 -- | aggressively normalize the given term.
 -- return Just normalform, or Nothing if it could not be found
 -- with the given recursion depth.
-normalize :: Int -> T -> S.State (M.Map T (Maybe T)) (Maybe T)
-normalize steps t = cached_fix norm steps t
+normalize :: Int -> T -> S.State Cache (Maybe T)
+normalize steps t = do
+    S.modify $ \ c -> c { st = steps }
+    cached_fix norm steps t
 
-cached_fix f s t = do
-    m <- S.get
-    case M.lookup t m of
+cached_fix f _ t = do
+    c <- S.get
+    if st c < 0 then return Nothing else 
+      case M.lookup t $ m c of
         Just res -> return res
         Nothing -> do
-            res <- if s > 0 then f ( cached_fix f (s-1) ) t
-                            else return Nothing
-            S.modify $ \ m -> M.insert t res m
+            S.modify $ \ c -> c { st = pred $ st c }
+            res <- f ( cached_fix f undefined ) t
+            S.modify $ \ c -> c { m = M.insert t res $ m c }
             return res
 
-norm self t = case t of
+norm self t = -- trace (show $ size t) $ 
+  case t of
     App {fun=f,arg=a} -> do
         nf <- self f
         case nf of
