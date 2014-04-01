@@ -4,7 +4,7 @@ import S.Size
 import Data.Hashable
 
 data T = S 
-       | App { _hash :: ! Int, _size :: ! Int, fun :: ! T, arg :: ! T }
+       | App { _hash :: ! Int, _size :: ! Integer, fun :: ! T, arg :: ! T }
        | Var { _hash :: ! Int, idx :: ! Int }
     deriving ( Eq, Ord )
 
@@ -13,6 +13,9 @@ subterms t = t : case t of
     App {fun=f,arg=a} -> [f,a] >>= subterms
     _ -> []
 
+varfree t = not $ any isVar $ subterms t
+
+isVar (Var {} ) = True; isVar _ = False
 
 fold :: a -> (a -> a -> a) -> T -> a
 fold s a t = case t of

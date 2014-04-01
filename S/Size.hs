@@ -1,4 +1,4 @@
 module S.Size where
 
-class Size t where size :: t -> Int
+class Size t where size :: t -> Integer
 

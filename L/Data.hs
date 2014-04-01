@@ -11,8 +11,8 @@ import S.Size
 import Data.Hashable
 
 data L = Var Int 
-       | App { _hash :: !Int, _size :: !Int, fun :: !L , arg :: !L }
-       | Lam { _hash :: !Int, _size :: !Int , body :: L }
+       | App { _hash :: !Int, _size :: !Integer, fun :: !L , arg :: !L }
+       | Lam { _hash :: !Int, _size :: !Integer , body :: L }
     deriving ( Eq, Ord )
 
 var i = Var i

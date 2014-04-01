@@ -5,6 +5,10 @@ import S.Size
 import S.Cache
 import S.Reduce (here)
 
+import qualified S.Table ( normalizing )
+
+
+
 import qualified Data.Map.Strict as M
 
 import qualified Control.Monad.State.Strict as S
@@ -36,7 +40,13 @@ normal steps t = S.evalState ( normalize steps t )
 normalize :: Int -> T -> S.State Cache (Maybe T)
 normalize steps t = do
     S.modify $ \ c -> c { st = steps }
-    cached_fix norm steps t
+    out <- cached_fix norm_tricky steps t
+    c <- S.get
+    ( case out of
+        Just t | size t > 10^6 -> trace $ show ( size t, st c )
+        _ -> id
+      ) $ return out
+        
 
 cached_fix f _ t = do
     c <- S.get
@@ -49,7 +59,30 @@ cached_fix f _ t = do
             S.modify $ \ c -> c { m = M.insert t res $ m c }
             return res
 
-norm self t = -- trace (show $ size t) $ 
+
+norm_tricky self t = -- ( if size t > 10^6 then trace $ show $ size t else id ) $ 
+    if varfree t 
+    then return $ if S.Table.normalizing t 
+                  then Just $ normalform t else Nothing
+    else case t of
+      App {fun=f,arg=a} -> do
+        nf <- self f
+        case nf of
+            Nothing -> return Nothing
+            Just nf -> do
+                 na <- self a
+                 case na of
+                     Nothing -> return Nothing 
+                     Just na -> do
+                         let t1 = app nf na 
+                         case here t1 of
+                             [] -> return $ Just t1
+                             t2 : _ -> self t2
+      _ -> return $ Just t
+
+
+
+norm self t = -- ( if size t > 10^6 then trace $ show $ size t else id ) $ 
   case t of
     App {fun=f,arg=a} -> do
         nf <- self f

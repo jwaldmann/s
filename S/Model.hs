@@ -4,6 +4,7 @@ import S.Type
 import qualified S.Cache as C
 import S.Context
 import S.Reduce (leftmost)
+import qualified S.Reduce 
 import S.ToDoc
 
 import qualified S.Normal
@@ -21,7 +22,8 @@ import System.IO
 type Normalize = Int -> T -> State C.Cache (Maybe T)
 
 write_full_black_table = do
-    m1 <- model1 6 66
+    -- m1 <- model0 6 66  -- this works
+    m1 <- model1 7 100  
     mo  <- build S.Normal.normalize m1
     print $ toDoc $ base mo
     print $ toDoc $ trans mo
@@ -66,7 +68,7 @@ classify lize (p,q) Nothing mo = do
 classify lize (p,q) (Just t) mo = do
     putStrLn "classify" ; printf ((p,q),t)
     n <- norma lize mo t
-    printf n
+    -- printf n
     let handle [] = do
             let i = M.size $ base mo
             putStrLn "fresh" ; printf i
@@ -88,8 +90,8 @@ classify lize (p,q) (Just t) mo = do
 
 
 missing m = do
-    (k1,v1) <- M.toList $ base m
     (k2,v2) <- M.toList $ base m
+    (k1,v1) <- M.toList $ base m
     guard $ not $ M.member (k1,k2) $ trans m
     return (k1,k2)
 

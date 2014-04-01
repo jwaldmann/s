@@ -7,6 +7,11 @@ import Control.Applicative ( (<$>) )
 
 import System.IO
 
+normalize steps t = do
+    let (pre,post) = splitAt steps $ innermost t
+    return $ if null post then Just $ last pre else Nothing
+
+
 leftmost :: T -> [T]
 leftmost t = t : case next t of
     [] -> []
@@ -19,6 +24,19 @@ next t = here t ++ ( case t of
      ++ map (\ y' -> app x y') (next y)
     _ -> []
          ) 
+
+innermost t = t : case next_inner t of
+    [] -> []
+    x : _ -> leftmost x
+
+
+next_inner t = ( case t of
+    App {fun=x,arg=y} -> 
+        map (\ x' -> app x' y) (next x)
+     ++ map (\ y' -> app x y') (next y)
+    _ -> []
+  ) ++  here t 
+         
 
 here t = case t of
     App{fun=App{fun=App{fun=S,arg=x},arg=y},arg=z} ->
