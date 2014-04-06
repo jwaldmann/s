@@ -2,6 +2,11 @@ module L.Eval.Pure where
 
 import qualified S.Type as S
 
+import System.Timeout ( timeout )
+import Control.Exception ( evaluate )
+
+import Data.Maybe ( isJust )
+
 -- | example due to Barendregt (NF size approx 10^6)
 check1 = eval $ read "(ststs)"
 
@@ -12,6 +17,10 @@ check2 = eval $ read "(t a (s (s t s t s)))"
 -- (will not return if there is no nf)
 eval :: S.T -> Integer
 eval t = measure $ build t
+
+eval_musec :: Int -> S.T -> IO (Maybe Integer)
+eval_musec mu t = timeout mu $ evaluate $ eval t
+
 
 build t = case t of
     S.S {} -> s

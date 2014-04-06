@@ -11,6 +11,8 @@ import qualified S.Normal
 import qualified S.Head
 import qualified L.Eval
 
+
+
 import Control.Monad.State.Strict ( runState, State )
 import qualified Data.Map.Strict as M
 import qualified Data.Set as S
@@ -23,7 +25,7 @@ type Normalize = Int -> T -> State C.Cache (Maybe T)
 
 write_full_black_table = do
     -- m1 <- model0 6 66  -- this works
-    m1 <- model1 7 100  
+    m1 <- model1 6 66  
     mo  <- build S.Normal.normalize m1
     print $ toDoc $ base mo
     print $ toDoc $ trans mo
@@ -31,7 +33,7 @@ write_full_black_table = do
 
 build_full = build S.Normal.normalize
 build_head = build S.Head.normalize
-build_beta_full = build L.Eval.normalize
+
 
 build :: Normalize -> Model -> IO Model
 build normalize m = do
@@ -78,7 +80,7 @@ classify lize (p,q) (Just t) mo = do
                    , accept = if isJust n then S.insert i $ accept mo else accept mo
                    }
         handle ((k,v): kvs) = do
-            -- putStrLn $ "handle" ++ show (k,v)
+            putStrLn $ "handle" ++ show (k,v)
             e <- equiv lize mo t v
             if e
             then do
@@ -90,8 +92,8 @@ classify lize (p,q) (Just t) mo = do
 
 
 missing m = do
+    (k1,v1) <- reverse $ M.toList $ base m
     (k2,v2) <- M.toList $ base m
-    (k1,v1) <- M.toList $ base m
     guard $ not $ M.member (k1,k2) $ trans m
     return (k1,k2)
 
@@ -109,8 +111,8 @@ equiv lize m t1 t2 =
         n1 <- norma lize m $ plugin con t1 
         n2 <- norma lize m $ plugin con t2 
 
-        when (False && ( isJust n1 /= isJust n2 ) )
-             $ error $ show (con, plugin con t1,plugin con t2)
+        when (( isJust n1 /= isJust n2 ) )
+             $ print (con, plugin con t1,plugin con t2)
 
         return $ isJust n1 == isJust n2
 

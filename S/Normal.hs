@@ -40,13 +40,7 @@ normal steps t = S.evalState ( normalize steps t )
 normalize :: Int -> T -> S.State Cache (Maybe T)
 normalize steps t = do
     S.modify $ \ c -> c { st = steps }
-    out <- cached_fix norm_tricky steps t
-    c <- S.get
-    ( case out of
-        Just t | size t > 10^6 -> trace $ show ( size t, st c )
-        _ -> id
-      ) $ return out
-        
+    cached_fix norm_tricky steps t
 
 cached_fix f _ t = do
     c <- S.get

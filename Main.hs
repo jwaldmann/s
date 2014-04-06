@@ -1,6 +1,9 @@
 import S.Type
 import S.Size
 import S.Model
+
+import qualified S.ModelIO
+
 import S.ToDoc
 import S.Reduce (isnormal)
 import qualified S.Reduce 
@@ -13,6 +16,7 @@ import S.Back
 import L.Type ( froms )
 import qualified L.Reduce
 import qualified L.Eval
+import qualified L.Eval.Pure
 import qualified L.Eval.Monadic as M
 import qualified L.Eval.Generic as G
 import qualified L.Convert
@@ -25,8 +29,10 @@ import Data.Maybe (isNothing, isJust)
 import System.IO 
 
 main = do
+    -- find_max_size $ 10^1
+    write_beta_table 5 1000
 
-    S.Model.write_full_black_table 
+    -- S.Model.write_full_black_table 
     -- compare_cl_beta_normal
 
     -- find_max_left
@@ -87,6 +93,19 @@ find_max_order = do
                Nothing -> work top ts
     work 0 $ concat S.Type.normalforms
 
+find_max_size mu = do
+    let work top (t:ts) = do
+            ms <- L.Eval.Pure.eval_musec mu t
+            case ms of
+               Just s -> do
+                when (s >= top) $ do
+                    print (t, size t, s)
+                    hFlush stdout
+                work (max top s) ts
+               Nothing -> work top ts
+    -- work 0 $ concat S.Type.normalforms
+    work 0 $ concat S.Type.terms
+
 print_multi_origins = forM_ multi_origins $ \ (t,os) -> do
      print (t, toDoc os)
 
@@ -144,9 +163,9 @@ write_head_table = do
     print $ toDoc $ S.Model.trans m1
     print $ toDoc $ S.Model.accept m1
 
-write_beta_table = do
-    m0 <- model0 6 1000
-    m1 <- build_beta_full m0
-    print $ toDoc $ base m1
-    print $ toDoc $ S.Model.trans m1
-    print $ toDoc $ S.Model.accept m1
+write_beta_table depth mu = do
+    m0 <- S.ModelIO.model0 depth mu
+    m1 <- S.ModelIO.build_beta_full m0
+    print $ toDoc $ S.ModelIO.base m1
+    print $ toDoc $ S.ModelIO.trans m1
+    print $ toDoc $ S.ModelIO.accept m1
