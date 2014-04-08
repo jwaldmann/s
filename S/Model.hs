@@ -80,7 +80,7 @@ classify lize (p,q) (Just t) mo = do
                    , accept = if isJust n then S.insert i $ accept mo else accept mo
                    }
         handle ((k,v): kvs) = do
-            putStrLn $ "handle" ++ show (k,v)
+            -- putStrLn $ "handle" ++ show (k,v)
             e <- equiv lize mo t v
             if e
             then do
@@ -111,7 +111,7 @@ equiv lize m t1 t2 =
         n1 <- norma lize m $ plugin con t1 
         n2 <- norma lize m $ plugin con t2 
 
-        when (( isJust n1 /= isJust n2 ) )
+        when ( False && ( isJust n1 /= isJust n2 ) )
              $ print (con, plugin con t1,plugin con t2)
 
         return $ isJust n1 == isJust n2

@@ -26,8 +26,7 @@ normalform t = case t of
 plapp f z = case f of
     App{fun=App{fun=S,arg=x},arg=y} -> 
                  plapp (plapp x z) (plapp y z)
-    App{fun=S,arg=x} -> app f z
-    S -> app f z
+    _ -> app f z
 
 -- | result of at most steps reductions, using cache
 normal steps t = S.evalState ( normalize steps t ) 

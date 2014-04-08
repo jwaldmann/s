@@ -29,8 +29,14 @@ import Data.Maybe (isNothing, isJust)
 import System.IO 
 
 main = do
+
+    -- this does not seem to halt:
+    write_beta_table 10 1000
+
+    -- this terminates (38 states):
+    -- write_cl_table 6 200
+
     -- find_max_size $ 10^1
-    write_beta_table 5 1000
 
     -- S.Model.write_full_black_table 
     -- compare_cl_beta_normal
@@ -155,6 +161,13 @@ find_head_monster = do
                 when up $ writeTVar top $ length ts
                 return up
             when up $ printf (size t, length ts, size $ last ts, t)
+
+write_cl_table dep len = do
+    m0 <- model0 dep len
+    m1 <- build_full m0
+    print $ toDoc $ base m1
+    print $ toDoc $ S.Model.trans m1
+    print $ toDoc $ S.Model.accept m1
 
 write_head_table = do
     m0 <- model0 8 200

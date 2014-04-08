@@ -78,8 +78,8 @@ classify lize (p,q) t mo = do
 
 
 missing m = do
-    (k1,v1) <- M.toList $ base m
     (k2,v2) <- M.toList $ base m
+    (k1,v1) <- M.toList $ base m
     guard $ not $ M.member (k1,k2) $ trans m
     return (k1,k2)
 
