@@ -31,7 +31,7 @@ import System.IO
 main = do
 
     -- this does not seem to halt:
-    write_beta_table 10 1000
+    write_beta_table 10 10000
 
     -- this terminates (38 states):
     -- write_cl_table 6 200

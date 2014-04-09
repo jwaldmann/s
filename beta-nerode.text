@@ -1,0 +1,1780 @@
+
+combine states (0,0) result t
+  ---------------------------------------------------
+  term t1 = t
+  term t2 = s
+  distinguished by context C = R (R (R (R (L s This) s) s) s) s of size 11
+  C[t1] = (s t s s s s) has nf size Nothing
+  C[t2] = (a s s s) has nf size Just 12
+is in a fresh equivalence class 1
+
+combine states (1,0) result a
+  ---------------------------------------------------
+  term t1 = a
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = a
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+is in a fresh equivalence class 2
+
+combine states (2,0) result (a s)
+  ---------------------------------------------------
+  term t1 = (a s)
+  term t2 = s
+  distinguished by context C = R (R (L s (L s (L s This))) s) s of size 11
+  C[t1] = (s (s (s (a s))) s s) has nf size Nothing
+  C[t2] = (s (s t) s s) has nf size Just 70
+  ---------------------------------------------------
+  term t1 = (a s)
+  term t2 = t
+  distinguished by context C = R (R (L s (L s (L s This))) s) s of size 11
+  C[t1] = (s (s (s (a s))) s s) has nf size Nothing
+  C[t2] = (s (s (s t)) s s) has nf size Just 197
+  ---------------------------------------------------
+  term t1 = (a s)
+  term t2 = a
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s t s s) has nf size Just 71
+  C[t2] = (a t s s) has nf size Nothing
+is in a fresh equivalence class 3
+
+combine states (3,0) result (a s s)
+  ---------------------------------------------------
+  term t1 = (a s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+is in a fresh equivalence class 4
+
+combine states (4,0) result (a s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s)
+  term t2 = (a s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s t s)) s) has nf size Nothing
+  C[t2] = (s (s (a s s t s)) s) has nf size Just 3152
+is in a fresh equivalence class 5
+
+combine states (5,0) result (a s s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s)
+  term t2 = (a s s)
+  distinguished by context C = R (L (s t t) (R (R This s) s)) s of size 13
+  C[t1] = (s t t (a s s s s s s) s) has nf size Nothing
+  C[t2] = (s t t (a s s s s) s) has nf size Just 23125
+  ---------------------------------------------------
+  term t1 = (a s s s s)
+  term t2 = (a s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s t s)) s) has nf size Just 3711
+  C[t2] = (s (s (a s s s t s)) s) has nf size Nothing
+is in a fresh equivalence class 6
+
+combine states (6,0) result (a s s s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s)
+  term t2 = (a s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s t s)) s) has nf size Nothing
+  C[t2] = (s (s (a s s t s)) s) has nf size Just 3152
+  ---------------------------------------------------
+  term t1 = (a s s s s s)
+  term t2 = (a s s s)
+  distinguished by context C = R (L (s t t) (R This s)) s of size 11
+  C[t1] = (s t t (a s s s s s s) s) has nf size Nothing
+  C[t2] = (s t t (a s s s s) s) has nf size Just 23125
+  ---------------------------------------------------
+  term t1 = (a s s s s s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s t s)) s) has nf size Nothing
+  C[t2] = (s (s (a s s s s t s)) s) has nf size Just 3711
+is in a fresh equivalence class 7
+
+combine states (7,0) result (a s s s s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s)
+  term t2 = (a s s)
+  distinguished by context C = R (L (s t t) This) s of size 9
+  C[t1] = (s t t (a s s s s s s) s) has nf size Nothing
+  C[t2] = (s t t (a s s) s) has nf size Just 1941
+  ---------------------------------------------------
+  term t1 = (a s s s s s s)
+  term t2 = (a s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s t s)) s) has nf size Just 4826
+  C[t2] = (s (s (a s s s t s)) s) has nf size Nothing
+  ---------------------------------------------------
+  term t1 = (a s s s s s s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (L (s t t) This) s of size 9
+  C[t1] = (s t t (a s s s s s s) s) has nf size Nothing
+  C[t2] = (s t t (a s s s s) s) has nf size Just 23125
+  ---------------------------------------------------
+  term t1 = (a s s s s s s)
+  term t2 = (a s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s t s)) s) has nf size Just 4826
+  C[t2] = (s (s (a s s s s s t s)) s) has nf size Nothing
+is in a fresh equivalence class 8
+
+combine states (8,0) result (a s s s s s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s s (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s)
+  term t2 = (a s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s t s)) s) has nf size Nothing
+  C[t2] = (s (s (a s s t s)) s) has nf size Just 3152
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s)
+  term t2 = (a s s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s) s s) has nf size Nothing
+  C[t2] = (t t (a s s s) s s) has nf size Just 4625
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s t s)) s) has nf size Nothing
+  C[t2] = (s (s (a s s s s t s)) s) has nf size Just 3711
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s)
+  term t2 = (a s s s s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s) s s) has nf size Nothing
+  C[t2] = (t t (a s s s s s) s s) has nf size Just 56765
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s)
+  term t2 = (a s s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s t s)) s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s t s)) s) has nf size Just 4826
+is in a fresh equivalence class 9
+
+combine states (9,0) result (a s s s s s s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s s s (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s)
+  term t2 = (a s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s s) s s) has nf size Nothing
+  C[t2] = (t t (a s s) s s) has nf size Just 152059
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s)
+  term t2 = (a s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s t s))
+ s) has nf size Just 7053
+  C[t2] = (s (s (a s s s t s)) s) has nf size Nothing
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s s) s s) has nf size Nothing
+  C[t2] = (t t (a s s s s) s s) has nf size Just 15961810
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s)
+  term t2 = (a s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s t s))
+ s) has nf size Just 7053
+  C[t2] = (s (s (a s s s s s t s)) s) has nf size Nothing
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s)
+  term t2 = (a s s s s s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s s) s s) has nf size Nothing
+  C[t2] = (t t (a s s s s s s) s s) has nf size Just 2636447377
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s)
+  term t2 = (a s s s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s t s))
+ s) has nf size Just 7053
+  C[t2] = (s (s (a s s s s s s s t s)) s) has nf size Nothing
+is in a fresh equivalence class 10
+
+combine states (10,0) result (a s s s s s s s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s s s s (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s)
+  term t2 = (a s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s t s))
+ s) has nf size Nothing
+  C[t2] = (s (s (a s s t s)) s) has nf size Just 3152
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s)
+  term t2 = (a s s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s s s) s s) has nf size Nothing
+  C[t2] = (t t (a s s s) s s) has nf size Just 4625
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s t s))
+ s) has nf size Nothing
+  C[t2] = (s (s (a s s s s t s)) s) has nf size Just 3711
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s)
+  term t2 = (a s s s s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s s s) s s) has nf size Nothing
+  C[t2] = (t t (a s s s s s) s s) has nf size Just 56765
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s)
+  term t2 = (a s s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s t s))
+ s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s t s)) s) has nf size Just 4826
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s)
+  term t2 = (a s s s s s s s)
+  distinguished by context C = L t (L s (L s (R (L a This) s))) of size 14
+  C[t1] = (t (s (s (a (a s s s s s s s s
+             s) s)))) has nf size Just 479
+  C[t2] = (t (s (s (a (a s s s s s s s)
+          s)))) has nf size Nothing
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s)
+  term t2 = (a s s s s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s t s))
+ s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s t s))
+ s) has nf size Just 7053
+is in a fresh equivalence class 11
+
+combine states (11,0) result (a s s s s s s s s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s s s s s (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s)
+  term t2 = (a s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s s s s) s
+ s) has nf size Nothing
+  C[t2] = (t t (a s s) s s) has nf size Just 152059
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s)
+  term t2 = (a s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s t
+       s)) s) has nf size Just 11504
+  C[t2] = (s (s (a s s s t s)) s) has nf size Nothing
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s s s s) s
+ s) has nf size Nothing
+  C[t2] = (t t (a s s s s) s s) has nf size Just 15961810
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s)
+  term t2 = (a s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s t
+       s)) s) has nf size Just 11504
+  C[t2] = (s (s (a s s s s s t s)) s) has nf size Nothing
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s)
+  term t2 = (a s s s s s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s s s s) s
+ s) has nf size Nothing
+  C[t2] = (t t (a s s s s s s) s s) has nf size Just 2636447377
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s)
+  term t2 = (a s s s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s t
+       s)) s) has nf size Just 11504
+  C[t2] = (s (s (a s s s s s s s t s)) s) has nf size Nothing
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s)
+  term t2 = (a s s s s s s s s)
+  distinguished by context C = R (L s (R (L s (R (R (L s (L s This)) s) s)) s)) s of size 17
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s)) s s) s) s) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s s s s s s s))
+       s s) s) s) has nf size Just 48773
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s t
+       s)) s) has nf size Just 11504
+  C[t2] = (s (s (a s s s s s s s s s t s))
+ s) has nf size Nothing
+is in a fresh equivalence class 12
+
+combine states (12,0) result (a s s s s s s s s s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s s s s s s (s t)
+ s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s)
+  term t2 = (a s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s s t
+       s)) s) has nf size Nothing
+  C[t2] = (s (s (a s s t s)) s) has nf size Just 3152
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s)
+  term t2 = (a s s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s s s s s) s
+ s) has nf size Nothing
+  C[t2] = (t t (a s s s) s s) has nf size Just 4625
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s s t
+       s)) s) has nf size Nothing
+  C[t2] = (s (s (a s s s s t s)) s) has nf size Just 3711
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s)
+  term t2 = (a s s s s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s s s s s) s
+ s) has nf size Nothing
+  C[t2] = (t t (a s s s s s) s s) has nf size Just 56765
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s)
+  term t2 = (a s s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s s t
+       s)) s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s t s)) s) has nf size Just 4826
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s)
+  term t2 = (a s s s s s s s)
+  distinguished by context C = R (R This t) (t a) of size 10
+  C[t1] = (a s s s s s s s s s s s t (t
+                            a)) has nf size Nothing
+  C[t2] = (a s s s s s s s t (t a)) has nf size Just 10496
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s s t
+       s)) s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s t s))
+ s) has nf size Just 7053
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s)
+  distinguished by context C = R (R This t) (t a) of size 10
+  C[t1] = (a s s s s s s s s s s s t (t
+                            a)) has nf size Nothing
+  C[t2] = (a s s s s s s s s s t (t a)) has nf size Just 41984
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s s t
+       s)) s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s t
+       s)) s) has nf size Just 11504
+is in a fresh equivalence class 13
+
+combine states (13,0) result (a s s s s s s s s s s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s t s
+ s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s t s
+ s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s s s s s s s (s t)
+ s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s t s
+ s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = (a s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s s s s s s)
+ s s) has nf size Nothing
+  C[t2] = (t t (a s s) s s) has nf size Just 152059
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = (a s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       t s)) s) has nf size Just 20403
+  C[t2] = (s (s (a s s s t s)) s) has nf size Nothing
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s s s s s s)
+ s s) has nf size Nothing
+  C[t2] = (t t (a s s s s) s s) has nf size Just 15961810
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = (a s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       t s)) s) has nf size Just 20403
+  C[t2] = (s (s (a s s s s s t s)) s) has nf size Nothing
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = (a s s s s s s)
+  distinguished by context C = R (R (L (t t) This) s) s of size 10
+  C[t1] = (t t (a s s s s s s s s s s s s)
+ s s) has nf size Nothing
+  C[t2] = (t t (a s s s s s s) s s) has nf size Just 2636447377
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       t s)) s) has nf size Just 20403
+  C[t2] = (s (s (a s s s s s s s t s)) s) has nf size Nothing
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s)
+  distinguished by context C = L s (L s (R (R (L s (L s (R This s))) s) s)) of size 15
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s s s s)) s s))) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s s s s s s s
+             s)) s s))) has nf size Just 37708
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       t s)) s) has nf size Just 20403
+  C[t2] = (s (s (a s s s s s s s s s t s))
+ s) has nf size Nothing
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s s)
+  distinguished by context C = L s (L s (R (R (L s (L s (R This s))) s) s)) of size 15
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s s s s)) s s))) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s s s s s s s s
+             s s)) s s))) has nf size Just 113119
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       t s)) s) has nf size Just 20403
+  C[t2] = (s (s (a s s s s s s s s s s s t
+       s)) s) has nf size Nothing
+is in a fresh equivalence class 14
+
+combine states (14,0) result (a s s s s s s s s s s s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s t s
+ s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s t s
+ s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s s s s s s s s (s
+                              t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s t s
+ s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = (a s s)
+  distinguished by context C = L s (L s (R (R (L s (L s This)) s) s)) of size 13
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s s s s)) s s))) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s)) s s))) has nf size Just 2359
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = (a s s s)
+  distinguished by context C = L s (L s (R (R (L s (L s This)) s) s)) of size 13
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s s s s)) s s))) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s s)) s s))) has nf size Just 1399
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = (a s s s s)
+  distinguished by context C = L s (L s (R (R (L s (L s This)) s) s)) of size 13
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s s s s)) s s))) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s s s)) s s))) has nf size Just 7072
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = (a s s s s s)
+  distinguished by context C = L s (L s (R (R (L s (L s This)) s) s)) of size 13
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s s s s)) s s))) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s s s s)) s
+       s))) has nf size Just 4192
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s)
+  distinguished by context C = L s (L s (R (R (L s (L s This)) s) s)) of size 13
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s s s s)) s s))) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s s s s s)) s
+       s))) has nf size Just 21211
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s)
+  distinguished by context C = L s (L s (R (R (L s (L s This)) s) s)) of size 13
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s s s s)) s s))) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s s s s s s)) s
+       s))) has nf size Just 12571
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s)
+  distinguished by context C = L s (L s (R (R (L s (L s This)) s) s)) of size 13
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s s s s)) s s))) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s s s s s s s))
+       s s))) has nf size Just 63628
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s)
+  distinguished by context C = L s (L s (R (R (L s (L s This)) s) s)) of size 13
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s s s s)) s s))) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s s s s s s s
+             s)) s s))) has nf size Just 37708
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s s)
+  distinguished by context C = L s (L s (R (R (L s (L s This)) s) s)) of size 13
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s s s s)) s s))) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s s s s s s s s
+             s)) s s))) has nf size Just 190879
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s s s)
+  distinguished by context C = L s (L s (R (R (L s (L s This)) s) s)) of size 13
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s s s s)) s s))) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s s s s s s s s
+             s s)) s s))) has nf size Just 113119
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s s s s)
+  distinguished by context C = L s (L s (R (R (L s (L s This)) s) s)) of size 13
+  C[t1] = (s (s (s (s (a s s s s s s s s s
+             s s s s)) s s))) has nf size Nothing
+  C[t2] = (s (s (s (s (a s s s s s s s s s
+             s s s)) s s))) has nf size Just 572632
+is in a fresh equivalence class 15
+
+combine states (15,0) result (a s s s s s s s s s s s s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s t
+ s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s t
+ s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s s s s s s s s s
+ (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s t
+ s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = (a s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s) t t) has nf size Nothing
+  C[t2] = (s (a s s) t t) has nf size Just 1262
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = (a s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s) t t) has nf size Nothing
+  C[t2] = (s (a s s s) t t) has nf size Just 341
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s) t t) has nf size Just 3788
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = (a s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s) t t) has nf size Just 1025
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s) t t) has nf size Just 11366
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s) t t) has nf size Just 3077
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s s) t t) has nf size Just 34100
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s s s) t t) has nf size Just 9233
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s s s s) t t) has nf size Just 102302
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s s s s s) t
+ t) has nf size Just 27701
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s s s s s s) t
+ t) has nf size Just 306908
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s)
+  term t2 = (a s s s s s s s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s s s s s s s)
+ t t) has nf size Just 83105
+is in a fresh equivalence class 16
+
+combine states (16,0) result (a s s s s s s s s s s s s s s
+ s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s s s s s s s s s s
+ (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s s) t t) has nf size Nothing
+  C[t2] = (s (a s s) t t) has nf size Just 1262
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s s) t t) has nf size Nothing
+  C[t2] = (s (a s s s) t t) has nf size Just 341
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s) t t) has nf size Just 3788
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s) t t) has nf size Just 1025
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s) t t) has nf size Just 11366
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s) t t) has nf size Just 3077
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s s) t t) has nf size Just 34100
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s s s) t t) has nf size Just 9233
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s s s s) t t) has nf size Just 102302
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s s s s s) t
+ t) has nf size Just 27701
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s s s s s s) t
+ t) has nf size Just 306908
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s s s s s s)
+  distinguished by context C = R (R (L s This) t) t of size 9
+  C[t1] = (s (a s s s s s s s s s s s s s
+    s s) t t) has nf size Nothing
+  C[t2] = (s (a s s s s s s s s s s s s s)
+ t t) has nf size Just 83105
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s s s s s s s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s t s)) s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s s s
+       s s t s)) s) has nf size Just 38198
+is in a fresh equivalence class 17
+
+combine states (17,0) result (a s s s s s s s s s s s s s s s
+ s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s (t t) s) has nf size Just 247
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s s (t t) s) has nf size Just 853
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s (t t) s) has nf size Just 742
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s (t t) s) has nf size Just 2560
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s (t t) s) has nf size Just 2227
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s (t t) s) has nf size Just 7681
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s (t t) s) has nf size Just 6682
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s (t t) s) has nf size Just 23044
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s (t t) s) has nf size Just 20047
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s (t t)
+ s) has nf size Just 69133
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s s (t t)
+ s) has nf size Just 60142
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s s s (t
+                              t) s) has nf size Just 207400
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s s s s
+ (t t) s) has nf size Just 180427
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s)
+  term t2 = (a s s s s s s s s s s s s s s
+ s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s s s s s
+ (t t) s) has nf size Just 622201
+is in a fresh equivalence class 18
+
+combine states (18,0) result (a s s s s s s s s s s s s s s s
+ s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s (t t) s) has nf size Just 247
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s (t t) s) has nf size Just 853
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s (t t) s) has nf size Just 742
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s (t t) s) has nf size Just 2560
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s (t t) s) has nf size Just 2227
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s (t t) s) has nf size Just 7681
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s (t t) s) has nf size Just 6682
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s (t t) s) has nf size Just 23044
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s (t t) s) has nf size Just 20047
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s (t t)
+ s) has nf size Just 69133
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s s (t t)
+ s) has nf size Just 60142
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s s s (t
+                              t) s) has nf size Just 207400
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s s s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s s s s
+ (t t) s) has nf size Just 180427
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s s s s s s s s s s s s
+ s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s s s s s
+ (t t) s) has nf size Just 622201
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s)
+  term t2 = (a s s s s s s s s s s s s s s s
+ s)
+  distinguished by context C = R (L s (L s (R (R This t) s))) s of size 12
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s t s)) s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s s s
+       s s s s t s)) s) has nf size Just 73785
+is in a fresh equivalence class 19
+
+combine states (19,0) result (a s s s s s s s s s s s s s s s
+ s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s (t t) s) has nf size Just 247
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s (t t) s) has nf size Just 853
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s (t t) s) has nf size Just 742
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s (t t) s) has nf size Just 2560
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s (t t) s) has nf size Just 2227
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s (t t) s) has nf size Just 7681
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s (t t) s) has nf size Just 6682
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s (t t) s) has nf size Just 23044
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s (t t) s) has nf size Just 20047
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s (t t)
+ s) has nf size Just 69133
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s s (t t)
+ s) has nf size Just 60142
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s s s (t
+                              t) s) has nf size Just 207400
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s s s s s s s s s s s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s s s s
+ (t t) s) has nf size Just 180427
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s s s s s s s s s s s
+ s)
+  distinguished by context C = R (R This (t t)) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s (t t) s) has nf size Nothing
+  C[t2] = (a s s s s s s s s s s s s s s s
+ (t t) s) has nf size Just 622201
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s s s s s s s s s s s s
+ s)
+  distinguished by context C = R (R (L s (L s (R (R This s) s))) s) s of size 13
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s s s
+       s s s s s s)) s s) has nf size Just 11849165
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s)
+  term t2 = (a s s s s s s s s s s s s s s s
+ s s)
+  distinguished by context C = R (R (L s (L s (R (R This s) s))) s) s of size 13
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s)) s s) has nf size Just 6849683
+is in a fresh equivalence class 20
+
+combine states (20,0) result (a s s s s s s s s s s s s s s s
+ s s s s)
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = s
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s s t s s) has nf size Nothing
+  C[t2] = (s t s s) has nf size Just 29
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = t
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s s t s s) has nf size Nothing
+  C[t2] = (t t s s) has nf size Just 12
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = a
+  distinguished by context C = R (R This (s t)) s of size 7
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s s (s t) s) has nf size Nothing
+  C[t2] = (a (s t) s) has nf size Just 7678
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s)
+  distinguished by context C = R (R (R This t) s) s of size 8
+  C[t1] = (a s s s s s s s s s s s s s s s
+ s s s s t s s) has nf size Nothing
+  C[t2] = (a s t s s) has nf size Just 71
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s)) s s) has nf size Just 1043
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s)) s s) has nf size Just 5417
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s)) s s) has nf size Just 3131
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s)) s s) has nf size Just 16253
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s)) s s) has nf size Just 9395
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s)) s s) has nf size Just 48761
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s s s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s)) s
+ s) has nf size Just 28187
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s s s s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s)) s
+ s) has nf size Just 146285
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s s s s s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s s))
+ s s) has nf size Just 84563
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s s s s s s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s s
+       s)) s s) has nf size Just 438857
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s s s s s s s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s s s
+       s)) s s) has nf size Just 253691
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s s s s s s s s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s s s
+       s s)) s s) has nf size Just 1316573
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s s s s s s s s s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s s s
+       s s s)) s s) has nf size Just 761075
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s s s s s s s s s s
+ s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s s s
+       s s s s)) s s) has nf size Just 3949721
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s s s s s s s s s s s
+ s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s s s
+       s s s s s)) s s) has nf size Just 2283227
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s s s s s s s s s s s
+ s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s s s
+       s s s s s s)) s s) has nf size Just 11849165
+  ---------------------------------------------------
+  term t1 = (a s s s s s s s s s s s s s s s
+ s s s s)
+  term t2 = (a s s s s s s s s s s s s s s s
+ s s s)
+  distinguished by context C = R (R (L s (L s (R This s))) s) s of size 11
+  C[t1] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s s)) s s) has nf size Nothing
+  C[t2] = (s (s (a s s s s s s s s s s s s
+       s s s s s s s)) s s) has nf size Just 6849683
+is in a fresh equivalence class 21
+
