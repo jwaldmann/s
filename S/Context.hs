@@ -1,9 +1,14 @@
 module S.Context where
 
 import S.Type
+import S.Size
 
 data Context = This | L !T !Context | R !Context !T
     deriving ( Eq, Ord, Show )
+
+instance Size Context where
+    size c = case c of
+        This -> 1 ; L t c -> succ $ size t + size c ; R c t -> succ $ size c + size t
 
 contexts :: Int -> [Context]
 contexts s = if s <= 0 then [ This ] else do

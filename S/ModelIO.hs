@@ -3,6 +3,7 @@ module S.ModelIO where
 import S.Type
 import S.Context
 import S.ToDoc
+import S.Size
 
 import qualified S.Normal
 import qualified S.Table as ST
@@ -47,7 +48,8 @@ norma lize m t =
                 return res
 
 classify lize (p,q) t mo = do
-    putStrLn "classify" ; printf ((p,q),t)
+    putStrLn ""    
+    putStrLn $ "combine states " ++ show (p,q) ++ " result " ++ show t
     n <- norma lize mo t
     if isNothing n then do
         let i = M.size $ base mo
@@ -59,7 +61,7 @@ classify lize (p,q) t mo = do
       -- printf n
       let handle [] = do
             let i = M.size $ base mo
-            putStrLn "fresh" ; printf i
+            putStrLn $ "is in a fresh equivalence class " ++ show i
             return $ mo
                    { base = M.insert i t $ base mo
                    , trans = M.insert (p,q) (Just i) $ trans mo
@@ -70,7 +72,7 @@ classify lize (p,q) t mo = do
             e <- equiv lize mo t v
             if e
             then do
-                 putStrLn "equiv" ; printf (k,v)
+                 putStrLn $ "is equiv to class " ++ show (k,v)
                  return $ mo { trans = M.insert (p,q) (Just k) $ trans mo }
             else do
                  handle kvs 
@@ -97,10 +99,13 @@ equiv lize m t1 t2 =
         n1 <- norma lize m $ plugin con t1 
         n2 <- norma lize m $ plugin con t2 
 
-        when (False && ( isJust n1 /= isJust n2 ) ) $ do
-            print con
-            print ( plugin con t1,plugin con t2)
-            print (n1, n2)
+        when (True && ( isJust n1 /= isJust n2 ) ) $ do
+            putStrLn $ "  ---------------------------------------------------"
+            putStrLn $ "  term t1 = " ++ show t1
+            putStrLn $ "  term t2 = " ++ show t2
+            putStrLn $ "  distinguished by context C = " ++ show con ++ " of size " ++ show (size con)
+            putStrLn $ "  C[t1] = " ++ show ( plugin con t1 ) ++ " has nf size " ++ show n1
+            putStrLn $ "  C[t2] = " ++ show ( plugin con t2 ) ++ " has nf size " ++ show n2
 
         return $ isJust n1 == isJust n2
 
