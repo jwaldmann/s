@@ -31,7 +31,7 @@ import System.IO
 main = do
 
     -- this does not seem to halt:
-    write_beta_table 10 1000
+    -- write_beta_table 10 1000
 
     -- this terminates (38 states):
     -- write_cl_table 6 200
@@ -46,7 +46,7 @@ main = do
     -- L.Convert.find_convertible_normalforms
     -- L.Pure.find_pure
     -- write_beta_table 
-    -- L.Eval.find_monster
+    L.Eval.find_monster
 
     -- S.Reduce.find_maxpipe
     -- L.Reduce.find_deep_vars

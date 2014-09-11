@@ -18,10 +18,10 @@ normalize steps t = do
 
 find_monster = do
     top <- atomically $ newTVar 0
---    forM_ (concat S.terms) $ \ t -> do   
-    forM_ (concat S.normalforms) $ \ t -> do   
+    forM_ (concat $ S.terms_for [S.J]) $ \ t -> do   
+--    forM_ (concat S.normalforms) $ \ t -> do   
         best <- atomically $ readTVar top
-        case eval (10^4) t of
+        case eval (10^5) t of
             Nothing -> when True $ printf (t, "*")
             Just (n,s) -> when ( n >= best ) $ do
                 printf (t,(n,s))

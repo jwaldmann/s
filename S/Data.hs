@@ -4,9 +4,12 @@ import S.Size
 import Data.Hashable
 
 data T = S 
+       | O
+       | J
        | App { _hash :: ! Int, _size :: ! Integer, fun :: ! T, arg :: ! T }
        | Var { _hash :: ! Int, idx :: ! Int }
     deriving ( Eq, Ord )
+
 
 subterms :: T -> [T]
 subterms t = t : case t of
@@ -25,33 +28,50 @@ fold s a t = case t of
 instance Size T where 
     size t = case t of App {} -> _size t ; _ -> 1
     
-terms :: [[T]]
-terms = [] : [s] : do
-    s <- [2 .. ]
-    return $ do
-        sl <- [1..s-1] ; let sr = s - sl
-        x <- terms !! sl
-        y <- terms !! sr
-        return $ app x y
+-- | for backward compatibility
+terms = terms_for [s]
 
-normalforms :: [[T]]
-normalforms = []: [s] : do 
-    z <- [2..]
-    return $ 
-         map (\ n -> unspine [s,n] ) (normalforms !! (z-1))
-      ++ do zl <- [1..z-2] ; let zr = z - 1 - zl
-            x <- normalforms !! zl ; y <- normalforms !! zr
-            return $ unspine [s,x,y]
+terms_for :: [T] -> [[T]]
+terms_for base = 
+    let terms = [] : base : do
+            s <- [2 .. ]
+            return $ do
+                sl <- [1..s-1] ; let sr = s - sl
+                x <- terms !! sl
+                y <- terms !! sr
+                return $ app x y
+    in  terms
 
+normalforms = normalforms_for [s]
+
+normalforms_for :: [T] -> [[T]]
+normalforms_for base = 
+    let normalforms = []: base : do 
+            z <- [2..]
+            return $ 
+                map (\ n -> unspine [s,n] ) (normalforms !! (z-1))
+                ++ do 
+                    zl <- [1..z-2] ; let zr = z - 1 - zl
+                    x <- normalforms !! zl ; y <- normalforms !! zr
+                    return $ unspine [s,x,y]
+    in  normalforms
 
 instance Hashable T where
     hashWithSalt s t = hashWithSalt s $ case t of
         S -> 314159
+        O -> 141593
+        J -> 415931
         Var {} -> _hash t
         App {} -> _hash t
 
 s :: T
 s = S
+
+o :: T
+o = O
+
+j :: T
+j = J
 
 t :: T
 t = app s s

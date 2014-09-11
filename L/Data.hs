@@ -21,6 +21,11 @@ lam b = Lam { _hash = hash (42 :: Int,b) , _size = 1 + size b , body = b }
 
 the_s = lam $ lam $ lam $ app (app (var 2) (var 0)) (app (var 1) (var 0))
 
+-- | J = \ a b c d -> a b (a d c)  = (4 3) (4 1 2)
+the_j = lam $ lam $ lam $ lam $ lam 
+      $ app (app (var 4) (var 3)) 
+      $ (app (app (var 4) (var 1)) (var 2))
+
 subterms :: L -> [L]
 subterms t = t : case t of
     App {fun=f,arg=a} -> [f,a] >>= subterms

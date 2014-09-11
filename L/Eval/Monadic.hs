@@ -17,6 +17,7 @@ eval s t =
 
 build t = case t of
     S.S {} -> return s
+    S.J {} -> return j
     S.App {} -> do 
        f <- build $ S.fun t ; a <- build $ S.arg t ; app f a
 
@@ -26,6 +27,11 @@ data Val = Fun { unFun :: (Val -> W.Writer [()] Val) }
 s = Fun $ \ x -> return $ Fun $ \ y -> return $ Fun $ \ z -> 
     -- app (app x z) (app y z)
     app x z >>= \ xz -> app y z >>= \ yz -> app xz yz
+
+j = Fun $ \ a -> return $ Fun $ \ b -> return
+  $ Fun $ \ c -> return $ Fun $ \ d -> 
+    app a b >>= \ ab -> app a d >>= \ ad -> app ad c >>= \ adc
+  -> app ab adc
 
 
 check = W.runWriter $ do

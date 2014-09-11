@@ -8,6 +8,7 @@ import S.ToDoc
 
 instance ToDoc T where
     toDoc x = case spine x of
+        J:[] -> "j"
         S:S:S:[] -> "a"
         S:S:S:rest ->   
             parens $ align $ fillSep $ "a" : map toDoc rest
@@ -17,7 +18,10 @@ instance ToDoc T where
         t:[] -> atom t
         t : rest -> parens $ align $ fillSep $ atom t :  map toDoc rest
 
-atom t = case t of S -> "s" ; Var{} -> toDoc (idx t) 
+atom t = case t of 
+    S -> "s" 
+    J -> "j" 
+    Var{} -> toDoc (idx t) 
 
 instance Show T where show = show . toDoc
 
