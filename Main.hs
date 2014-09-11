@@ -46,7 +46,7 @@ main = do
     -- L.Convert.find_convertible_normalforms
     -- L.Pure.find_pure
     -- write_beta_table 
-    L.Eval.find_monster
+    L.Eval.find_monster_to $ 10^5
 
     -- S.Reduce.find_maxpipe
     -- L.Reduce.find_deep_vars

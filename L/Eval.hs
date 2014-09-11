@@ -16,12 +16,12 @@ normalize steps t = do
         Just (n,s) -> return $ Just t
         Nothing -> return Nothing
 
-find_monster = do
+find_monster_to bound = do
     top <- atomically $ newTVar 0
     forM_ (concat $ S.terms_for [S.J]) $ \ t -> do   
 --    forM_ (concat S.normalforms) $ \ t -> do   
         best <- atomically $ readTVar top
-        case eval (10^5) t of
+        case eval bound t of
             Nothing -> when True $ printf (t, "*")
             Just (n,s) -> when ( n >= best ) $ do
                 printf (t,(n,s))
