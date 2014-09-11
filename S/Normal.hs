@@ -7,12 +7,15 @@ import S.Reduce (here)
 
 import qualified S.Table ( normalizing )
 
+import Control.Concurrent.STM
+import Control.Monad (forM_, when)
 
 
 import qualified Data.Map.Strict as M
 
 import qualified Control.Monad.State.Strict as S
 import Control.Monad ( forM )
+import System.IO
 
 import Debug.Trace(trace)
 
@@ -26,6 +29,8 @@ normalform t = case t of
 plapp f z = case f of
     App{fun=App{fun=S,arg=x},arg=y} -> 
                  plapp (plapp x z) (plapp y z)
+    App{fun=App{fun=App{fun=App{fun=J,arg=a},arg=b},arg=c},arg=d} -> 
+        plapp (plapp a b) (plapp (plapp a d) c)
     _ -> app f z
 
 -- | result of at most steps reductions, using cache
@@ -92,3 +97,17 @@ norm self t = -- ( if size t > 10^6 then trace $ show $ size t else id ) $
                              t2 : _ -> self t2
     _ -> return $ Just t
                           
+
+
+find_monster = do
+    top <- atomically $ newTVar 0
+    forM_ (concat $ terms_for [J]) $ \ t -> do   
+        let sizes = do
+                food <- [ 0 .. 50 ]
+                let t' = unspine $ t : ( map var $ take food [ 10 .. ] )
+                return $ size $ normalform t'
+        best <- atomically $ readTVar top
+        when ( maximum sizes > best ) $ do
+                let printf x = do print x ; hFlush stdout
+                printf (t,sizes)
+                atomically $ writeTVar top $ maximum sizes

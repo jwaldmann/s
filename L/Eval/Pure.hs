@@ -24,10 +24,14 @@ eval_musec mu t = timeout mu $ evaluate $ eval t
 
 build t = case t of
     S.S {} -> s
+    S.J {} -> j
     S.App {S.fun = f, S.arg = a} -> app (build f) (build a)
 
 s = Fun $ \ x -> Fun $ \ y -> Fun $ \ z -> 
     app (app x z) (app y z)
+
+j = Fun $ \ a -> Fun $ \ b -> Fun $ \ c -> Fun $ \ d -> 
+    app (app a b) (app (app a d) c)
 
 -- | the Val type represents semantics for (head?) normal forms:
 data Val = Fun   (Val -> Val ) 
