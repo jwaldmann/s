@@ -39,7 +39,7 @@ normal steps t = S.evalState ( normalize steps t )
 normalize :: Int -> T -> S.State Cache (Maybe T)
 normalize steps t = do
     S.modify $ \ c -> c { st = steps }
-    cached_fix norm_tricky steps t
+    cached_fix norm {- norm_tricky -} steps t
 
 cached_fix f _ t = do
     c <- S.get

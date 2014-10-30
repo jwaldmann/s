@@ -10,11 +10,13 @@ instance Size Context where
     size c = case c of
         This -> 1 ; L t c -> succ $ size t + size c ; R c t -> succ $ size c + size t
 
-contexts :: Int -> [Context]
-contexts s = if s <= 0 then [ This ] else do
+contexts = contexts_for [s]
+
+contexts_for :: [T] -> Int -> [Context]
+contexts_for base s = if s <= 0 then [ This ] else do
     here <- [1..s]
-    c <- contexts ( s - here )
-    t <- terms !! here
+    c <- contexts_for base ( s - here )
+    t <- terms_for base !! here
     [ L t c, R c t ]
 
 plugin :: Context -> T -> T

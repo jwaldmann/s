@@ -6,6 +6,8 @@ import Data.Hashable
 data T = S 
        | O
        | J
+       | B -- \ a b c ->  a (b c)
+       | D -- \ x -> x x
        | App { _hash :: ! Int, _size :: ! Integer, fun :: ! T, arg :: ! T }
        | Var { _hash :: ! Int, idx :: ! Int }
     deriving ( Eq, Ord )
@@ -45,7 +47,8 @@ terms_for base =
 normalforms = normalforms_for [s]
 
 normalforms_for :: [T] -> [[T]]
-normalforms_for base = 
+normalforms_for base = error "normalforms_for base"
+{-
     let normalforms = []: base : do 
             z <- [2..]
             return $ 
@@ -55,12 +58,15 @@ normalforms_for base =
                     x <- normalforms !! zl ; y <- normalforms !! zr
                     return $ unspine [s,x,y]
     in  normalforms
+-}
 
 instance Hashable T where
     hashWithSalt s t = hashWithSalt s $ case t of
         S -> 314159
         O -> 141593
         J -> 415931
+        B -> 873251
+        D -> 310987
         Var {} -> _hash t
         App {} -> _hash t
 
@@ -72,6 +78,10 @@ o = O
 
 j :: T
 j = J
+
+b :: T ; b = B
+
+d :: T ; d = D
 
 t :: T
 t = app s s

@@ -22,19 +22,27 @@ import qualified L.Eval.Generic as G
 import qualified L.Convert
 import qualified L.Pure
 
-import Control.Monad ( forM_, when )
+import Control.Monad ( forM_, when, guard )
+import Data.List ( inits, tails, nub)
 import qualified Data.Map as M
+import qualified Data.Set as S
 import Control.Concurrent.STM
 import Data.Maybe (isNothing, isJust)
 import System.IO 
 
 main = do
 
+    find_normal_monster_for [b,d]
+    -- find_divergent_for [b,d]
+    -- write_cl_table_for [ d,b ] 6 500
+
     -- this does not seem to halt:
     -- write_beta_table 10 1000
 
     -- this terminates (38 states):
     -- write_cl_table 6 200
+
+
 
     -- find_max_size $ 10^1
 
@@ -46,7 +54,7 @@ main = do
     -- L.Convert.find_convertible_normalforms
     -- L.Pure.find_pure
     -- write_beta_table 
-    L.Eval.find_monster_to $ 10^5
+    -- L.Eval.find_monster_to $ 10^5
 
     -- S.Reduce.find_maxpipe
     -- L.Reduce.find_deep_vars
@@ -58,7 +66,6 @@ main = do
     -- write_head_table
     -- check_head_normalization
     -- find_head_monster
-    -- find_normal_monster
 
     -- check_forward_closed_head TH.trans
     -- equiv_examples 
@@ -138,11 +145,41 @@ check_head_normalization = do
         if v == n then if v then putStr "." else putStr "!" else error $ show $ toDoc (t,v,n)
         hFlush stdout
 
+find_divergent_for bs = do
+    div <- atomically $ newTVar $ S.empty
+    forM_ (concat $ terms_for bs) $ \ t -> do
+        s <- atomically $ readTVar div
+        when ( not $ or $ for (subterms t) $ \ u -> S.member u s 
+              || case u of App {fun=D,arg=App{fun=App{fun=B},arg=D}} -> True ; _ -> False
+               ) $ do
+            case S.Normal.normal (10 ^ 2) t of
+                Nothing -> do
+                    atomically $ modifyTVar div $ S.insert t
+                    -- printf t
+                Just n -> do
+                    printf t
+                    return ()
+
+for = flip map
+
 find_normal_monster = do
     top <- atomically $ newTVar 0
-    forM_ (concat terms) $ \ t -> 
+    forM_ (concat $ terms) $ \ t -> 
         when (S.Table.normalizing t) $ do
             let n = S.Normal.normalform t
+            up <- atomically $ do
+                s <- readTVar top
+                let up = size n > s 
+                when up $ writeTVar top $ size n
+                return up
+            when up $ printf (size t, size n, t)
+
+find_normal_monster_for bs = do
+    top <- atomically $ newTVar 0
+    forM_ (concat $ terms_for bs) $ \ t -> 
+        case S.Normal.normal (10 ^ 2) t of
+          Nothing -> return ()
+          Just n -> do
             up <- atomically $ do
                 s <- readTVar top
                 let up = size n > s 
@@ -162,9 +199,11 @@ find_head_monster = do
                 return up
             when up $ printf (size t, length ts, size $ last ts, t)
 
-write_cl_table dep len = do
-    m0 <- model0 dep len
-    m1 <- build_full m0
+write_cl_table = write_cl_table_for [s] 
+
+write_cl_table_for bs dep len = do
+    m0 <- model_for bs dep len
+    m1 <- build_full_for bs m0
     print $ toDoc $ base m1
     print $ toDoc $ S.Model.trans m1
     print $ toDoc $ S.Model.accept m1
@@ -182,3 +221,43 @@ write_beta_table depth mu = do
     print $ toDoc $ S.ModelIO.base m1
     print $ toDoc $ S.ModelIO.trans m1
     print $ toDoc $ S.ModelIO.accept m1
+
+
+----------------------------------------------------
+
+highdees n k = do
+    yield <- inserts k d $ replicate n b
+    t <- termsfrom yield
+    return t
+
+looksnormalizing n = isJust . S.Normal.normal n
+
+-- replace exactly k elements of ys by x    
+inserts :: Int -> a -> [a] -> [[a]]
+inserts 0 x ys = return ys
+inserts k x ys = do
+    guard $ k <= length ys
+    (pre, this : post) <- splits ys
+    post' <- inserts (k-1) x post
+    return $ pre ++ x : post'
+
+termsfrom :: [T] -> [T]
+termsfrom [leaf] = return leaf
+termsfrom yield = do
+    (pre, post) <- splits yield
+    guard $ not $ null pre
+    guard $ not $ null post
+    l <- termsfrom pre ; r <- termsfrom post
+    return $ app l r
+
+splits xs = zip (inits xs) (tails xs)
+
+b_subterms k n = nub $ do
+    t <- terms_for [b] !! n
+    let s = unspine $ t : map var [ 1 .. k ]
+    let Just n = S.Normal.normal 100 s
+    u <- subterms n
+    guard $ bfree u && size u == fromIntegral k
+    return u
+
+bfree u = and $ for (subterms u) $ \ s -> s /= b

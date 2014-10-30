@@ -31,20 +31,24 @@ write_full_black_table = do
     print $ toDoc $ trans mo
     print $ toDoc $ accept mo
 
-build_full = build S.Normal.normalize
-build_head = build S.Head.normalize
+build = build_for [s]
+build_full = build_full_for [s]
+build_head = build_head_for [s]
+
+build_full_for bs = build_for bs S.Normal.normalize
+build_head_for bs = build_for bs S.Head.normalize
 
 
-build :: Normalize -> Model -> IO Model
-build normalize m = do
+build_for :: [T] -> Normalize -> Model -> IO Model
+build_for bs normalize m = do
     -- putStrLn "build" ; print m
     case missing m of
         [] -> return m
         (p,q):_ -> do
             let t = app (base m M.! p) (base m M.! q)
             -- m' <- normal_classify normalize (p,q) t m
-            m' <- classify normalize (p,q) (Just t) m
-            build normalize m'
+            m' <- classify_for bs normalize (p,q) (Just t) m
+            build_for bs normalize m'
 
 norma lize m t = do
     s0 <- atomically $ readTVar $ state m
@@ -54,26 +58,31 @@ norma lize m t = do
     -- putStrLn $ unwords [ "norm", show (M.size s1), show t, show n ]
     return n
 
-normal_classify lize (p,q) t mo = do
+normal_classify = normal_classify_for [s]
+
+normal_classify_for bs lize (p,q) t mo = do
     putStrLn "normal_classify" ; printf ((p,q),t)
     n <- norma lize mo t
-    classify lize (p,q) n mo
+    classify_for bs lize (p,q) n mo
 
 mkcache mo = do
     s <- atomically $ readTVar $ state mo
     return $ C.Cache { C.m = s, C.st = 0 }
 
-classify lize (p,q) Nothing mo = do
+classify = classify_for [s]
+
+classify_for bs lize (p,q) Nothing mo = do
     putStrLn "is non-terminating"
     return $ mo { trans = M.insert (p,q) Nothing $ trans mo }
 
-classify lize (p,q) (Just t) mo = do
-    putStrLn "classify" ; printf ((p,q),t)
+classify_for bs lize (p,q) (Just t) mo = do
+    putStr "classify " 
+    printf_ ((p,q),t) ; putStr " : " 
     n <- norma lize mo t
     -- printf n
     let handle [] = do
             let i = M.size $ base mo
-            putStrLn "fresh" ; printf i
+            putStr "fresh " ; printf i
             return $ mo
                    { base = M.insert i t $ base mo
                    , trans = M.insert (p,q) (Just i) $ trans mo
@@ -81,10 +90,10 @@ classify lize (p,q) (Just t) mo = do
                    }
         handle ((k,v): kvs) = do
             -- putStrLn $ "handle" ++ show (k,v)
-            e <- equiv lize mo t v
+            e <- equiv_for bs lize mo t v
             if e
             then do
-                 putStrLn "equiv" ; printf (k,v)
+                 putStr "equiv " ; printf (k,v)
                  return $ mo { trans = M.insert (p,q) (Just k) $ trans mo }
             else do
                  handle kvs 
@@ -93,7 +102,7 @@ classify lize (p,q) (Just t) mo = do
 
 missing m = do
     (k1,v1) <- reverse $ M.toList $ base m
-    (k2,v2) <- M.toList $ base m
+    (k2,v2) <- id       $ M.toList $ base m
     guard $ not $ M.member (k1,k2) $ trans m
     return (k1,k2)
 
@@ -104,14 +113,16 @@ forall (x:xs) f = do
         False -> return False
         True  -> forall xs f
 
-equiv lize m t1 t2 = 
-    forall ([0 .. con m] >>= contexts) $ \ con -> do
+equiv = equiv_for [s]
+
+equiv_for bs lize m t1 t2 = 
+    forall ([0 .. con m] >>= contexts_for bs) $ \ con -> do
         -- print (t1, t2, con)
 
         n1 <- norma lize m $ plugin con t1 
         n2 <- norma lize m $ plugin con t2 
-
-        when ( False && ( isJust n1 /= isJust n2 ) )
+ 
+        when ( True && ( isJust n1 /= isJust n2 ) )
              $ print (con, plugin con t1,plugin con t2)
 
         return $ isJust n1 == isJust n2
@@ -125,22 +136,22 @@ data Model = Model { base :: ! ( M.Map Int T )
            , con :: ! Int, dep :: ! Int
              } 
 
-model0 c d = do
+
+model_for cs c d = do
     st <- atomically $ newTVar M.empty
     return $ Model 
-         { base = M.singleton 0 s , trans = M.empty, accept = S.empty
+         { base = M.fromList $ zip [ 0..] cs
+         , trans = M.empty
+         , accept = S.empty
          , state = st
          , con=c,dep=d 
          }
+
+model0 = model_for [s] 
 
 -- | basis is { S, black-hole }
-model1 c d = do
-    st <- atomically $ newTVar M.empty
-    return $ Model 
-         { base = M.fromList [( 0, s), (1, var 0) ] 
-         , trans = M.empty, accept = S.empty
-         , state = st
-         , con=c,dep=d 
-         }
+model1 = model_for [s, var 0]
 
-printf x = do print x ; hFlush stdout
+printf x = do putStrLn $ show x ; hFlush stdout
+
+printf_ x = do putStr $ show x ; hFlush stdout

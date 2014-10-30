@@ -21,6 +21,8 @@ instance ToDoc T where
 atom t = case t of 
     S -> "s" 
     J -> "j" 
+    B -> "."
+    D -> "d"
     Var{} -> toDoc (idx t) 
 
 instance Show T where show = show . toDoc

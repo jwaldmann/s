@@ -39,8 +39,9 @@ next_inner t = ( case t of
          
 
 here t = case t of
-    App{fun=App{fun=App{fun=S,arg=x},arg=y},arg=z} ->
-        [ app (app x z) (app y z) ]
+    App{fun=App{fun=App{fun=S,arg=x},arg=y},arg=z} -> [ app (app x z) (app y z) ]
+    App{fun=App{fun=App{fun=B,arg=x},arg=y},arg=z} -> [ app x (app y z) ]
+    App{fun=D,arg=x} -> [app x x]
     _ -> []
 
 isnormal = null . next
