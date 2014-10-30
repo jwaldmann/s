@@ -54,7 +54,12 @@ main = do
     -- L.Convert.find_convertible_normalforms
     -- L.Pure.find_pure
     -- write_beta_table 
-    -- L.Eval.find_monster_to $ 10^5
+
+
+    -- let second = 10^6 ; minute = 60 * second
+    -- L.Eval.find_monster_to $ 15 * minute 
+    -- S.Normal.find_monster
+
 
     -- S.Reduce.find_maxpipe
     -- L.Reduce.find_deep_vars
