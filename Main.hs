@@ -27,7 +27,7 @@ import Data.List ( inits, tails, nub)
 import qualified Data.Map as M
 import qualified Data.Set as S
 import Control.Concurrent.STM
-import Data.Maybe (isNothing, isJust)
+import Data.Maybe (isNothing, isJust, maybeToList)
 import System.IO 
 
 main = do
@@ -257,12 +257,15 @@ termsfrom yield = do
 
 splits xs = zip (inits xs) (tails xs)
 
-b_subterms k n = nub $ do
-    t <- terms_for [b] !! n
+-- | ground term over base, attach variables [1..k],
+-- enumerate all pure subterms that are reachable
+reachable_subterms_for bs k = nub $ do
+    n <- [1 .. ]
+    t <- terms_for bs !! n
     let s = unspine $ t : map var [ 1 .. k ]
-    let Just n = S.Normal.normal 100 s
+    n <- maybeToList $ S.Normal.normal 100 s
     u <- subterms n
-    guard $ bfree u && size u == fromIntegral k
+    guard $ bfree u 
     return u
 
 bfree u = and $ for (subterms u) $ \ s -> s /= b
