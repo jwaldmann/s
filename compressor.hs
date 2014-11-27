@@ -19,6 +19,6 @@ main = do
                 writeTVar top $ max this prev
                 return ( this >= prev, this )
             when up $ do
-                print (t,s,this)
+                print (this, t,size e, s)
                 hFlush stdout
 
