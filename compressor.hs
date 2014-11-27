@@ -10,7 +10,9 @@ import System.IO
 
 main = do
     top <- atomically $ newTVar 0
-    forM_ ( concat $ terms_for [s] ) $ \ t -> 
+    -- let ts = concat $ terms_for [s] 
+    let ts = map monster [ 1 ..  ]
+    forM_ ts $ \ t -> 
         when ( normalizing t ) $ do
             let (s,r,e) = normal t
             (up, this) <- atomically $ do
@@ -19,6 +21,13 @@ main = do
                 writeTVar top $ max this prev
                 return ( this >= prev, this )
             when up $ do
-                print (this, t,size e, s)
+                print ( (fromRational this) :: Double
+                      , t,size t
+                      , size e, s)
                 hFlush stdout
+
+line k = 
+    unspine $ replicate (k + 1) s
+monster k = 
+    unspine [ s, unspine [s,s,s], line k, s, s, s]
 
