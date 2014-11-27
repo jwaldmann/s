@@ -23,7 +23,8 @@ main = do
             when up $ do
                 print ( (fromRational this) :: Double
                       , t,size t
-                      , size e, s)
+                      -- , size e
+                      , s)
                 hFlush stdout
 
 line k = 
