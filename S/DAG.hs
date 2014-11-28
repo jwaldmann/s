@@ -13,17 +13,18 @@ newtype Ptr = Ptr Int
 data Node = Leaf | Branch Ptr Ptr
     deriving ( Eq, Ord, Show )
 
-data St = St { norm :: M.Map Ptr Ptr
-             , fore :: M.Map Ptr Node
-             , back :: M.Map Node Ptr
+data St = St { norm :: ! (M.Map Ptr Ptr)
+             , fore :: ! (M.Map Ptr Node)
+             , back :: ! (M.Map Node Ptr)
              }
     deriving Show
 
 normal t = flip T.evalState empty $ do
     p <- no t
+    o <- M.size <$> T.gets fore
     r <- reachable p
-    e <- expand p
-    return (M.size r, r,e)
+    -- e <- expand p
+    return (M.size r, o)
 
 reachable p = do
     f <- T.gets fore

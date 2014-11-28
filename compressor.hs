@@ -10,24 +10,32 @@ import System.IO
 
 main = do
     top <- atomically $ newTVar 0
-    -- let ts = concat $ terms_for [s] 
-    let ts = map monster [ 1 ..  ]
+    let ts = -- concat $ terms_for [s] 
+             -- map monster2 [ 1 ..  ]
+             map monster3 [ 1 ..  ]
     forM_ ts $ \ t -> 
         when ( normalizing t ) $ do
-            let (s,r,e) = normal t
+            let (s,o) = normal t
             (up, this) <- atomically $ do
-                let this = fromIntegral s % size t
+                let this = -- fromIntegral s % size t
+                         fromIntegral o % fromIntegral s
+                         -- fromIntegral o % size t
                 prev <- readTVar top
                 writeTVar top $ max this prev
                 return ( this >= prev, this )
             when up $ do
                 print ( (fromRational this) :: Double
-                      , t,size t
-                      , size e, s)
+                      -- , t 
+                      ,size t
+                      ,  s,o)
                 hFlush stdout
 
 line k = 
     unspine $ replicate (k + 1) s
-monster k = 
-    unspine [ s, unspine [s,s,s], line k, s, s, s]
-
+monster1 k = 
+    unspine [ s, a, line k, s, s, s]
+monster2 k = 
+    unspine [ s, t, t, line k, s]
+monster3 k = 
+    let tee k = foldr app (app s a) $ replicate k t
+    in  unspine [ tee k,s,s,s]
