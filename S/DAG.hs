@@ -1,14 +1,21 @@
+{-# language GeneralizedNewtypeDeriving #-}
+
 module S.DAG where
 
 import S.Type 
+
+import qualified Data.GraphViz as V
+import qualified Data.GraphViz.Attributes.Complete as V
+import  Data.GraphViz.Attributes.Colors.X11
 
 import qualified Data.Map.Strict as M
 import qualified Data.Set as S
 import qualified Control.Monad.State.Strict as T
 import Control.Applicative ((<$>),(<*>))
+import Control.Monad ( guard )
 
 newtype Ptr = Ptr Int
-    deriving ( Eq, Ord, Show )
+    deriving ( Eq, Ord, Show, V.PrintDot )
 
 data Node = Leaf | Branch Ptr Ptr
     deriving ( Eq, Ord, Show )
@@ -18,6 +25,9 @@ data St = St { norm :: ! (M.Map Ptr Ptr)
              , back :: ! (M.Map Node Ptr)
              }
     deriving Show
+
+dag t = flip T.execState empty $ no t
+
 
 normal t = flip T.evalState empty $ do
     p <- no t
@@ -102,6 +112,33 @@ match p leaf branch = do
         Leaf -> leaf
         Branch l r -> branch l r
 
+-------------------------------------------------------------------------
 
+display t = V.runGraphvizCanvas V.Dot (viz $ dag t) V.Gtk
+
+-- viz :: M.Map Ptr Node -> V.DotGraph Ptr
+viz st = 
+    let tochildren = do
+              (from, Branch l r) <- M.toList $ fore st
+              (to, col) <- [(l,Blue),(r,Red)]
+              return $ V.DotEdge from to [ V.Color [V.WC (V.X11Color col) Nothing ] ]
+        tonormal = do
+              (from, to) <- M.toList $ norm st
+              guard $ from /= to
+              return $ V.DotEdge from to [ V.Color [V.WC (V.X11Color Green) Nothing ] ]
+    in  V.DotGraph
+    { V.strictGraph = False
+    , V.directedGraph = True
+    , V.graphID = Nothing
+    , V.graphStatements = V.DotStmts
+        { V.attrStmts = []
+        , V.subGraphs = []
+        , V.nodeStmts = do
+              (from, _) <- M.toList $ fore st
+              return $ V.DotNode from [ V.Shape V.PlainText ]
+        , V.edgeStmts = tochildren ++ tonormal
+        }
+    }
+        
         
         

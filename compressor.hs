@@ -1,3 +1,21 @@
+{-
+
+notation: 
+
+t in CL(S), 
+Nf(t) - normal form of t
+DAG(t) - DAG of t with complete exact hash consing
+(equivalently, reduced in the BDD sense: each node has an address, 
+for each addresses p, q: @(p,q) occurs at most once)
+
+conjectures:
+
+
+
+
+-}
+
+
 import S.DAG
 import S.Type
 import S.Size
