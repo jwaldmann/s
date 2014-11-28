@@ -25,9 +25,9 @@ main = do
                 return ( this >= prev, this )
             when up $ do
                 print ( (fromRational this) :: Double
-                      -- , t 
-                      ,size t
-                      ,  s,o)
+                      , t,size t
+                      -- , size e
+                      , s)
                 hFlush stdout
 
 line k = 
