@@ -28,15 +28,15 @@ import System.IO
 
 main = do
     top <- atomically $ newTVar 0
-    let ts = -- concat $ terms_for [s] 
+    let ts = concat $ terms_for [s] 
              -- map monster2 [ 1 ..  ]
-             map monster3 [ 1 ..  ]
+             -- map monster3 [ 1 ..  ]
     forM_ ts $ \ t -> 
         when ( normalizing t ) $ do
             let (s,o) = normal t
             (up, this) <- atomically $ do
-                let this = -- fromIntegral s % size t
-                         fromIntegral o % fromIntegral s
+                let this =  fromIntegral s % size t
+                         -- fromIntegral o % fromIntegral s
                          -- fromIntegral o % size t
                 prev <- readTVar top
                 writeTVar top $ max this prev
