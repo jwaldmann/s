@@ -1,0 +1,196 @@
+\documentclass[12pt]{article}
+\usepackage[text={6in,9in},centering]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\CL}{\operatorname{\textbf{CL}}}
+\newcommand{\Term}{\operatorname{Term}}
+\newcommand{\SN}{\operatorname{SN}}
+\newcommand{\Lang}{\operatorname{Lang}}
+
+\title{Challenges for Termination Provers \\
+  (Properties of the S Combinator) \\
+  DRAFT
+}
+\author{Johannes Waldmann}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+We propose several benchmarks
+that can be used to evaluate power and progress
+of software that analyzes termination 
+and derivational complexity of term rewriting.
+
+In particular, we are interested in
+\begin{itemize}
+\item a proof of termination
+\item a proof of quadratic innermost derivational complexity
+\item a proof of context-sensitive termination
+\item a proof of relative top-termination
+\end{itemize}
+for systems with a large number of rules (approx. 2000 rules)
+or a medium-sized signature (approx. 40 symbols).
+
+These benchmarks have a common source: 
+they originate from the study of the combinator $S$
+\cite{DBLP:journals/iandc/Waldmann00}.
+This is the rewriting system 
+\[ \{ A(A(A(S,x),y),z)\to A(A(x,z),A(y,z)) \} \]
+over signature $\{S/0, A/2\}$.
+Using methods from (cite: local termination),
+\cite{DBLP:journals/corr/abs-1006-4955},
+we obtain the challenge systems by semantic labelling
+\cite{DBLP:journals/fuin/Zantema95}.
+We use two models: the underlying tree automaton
+describes the normalizing terms, 
+and the (conjectured) head-normalizing terms, respectively.
+
+
+\section{Termination}
+
+\emph{Motivation:}
+We have deterministic (incomplete) tree automaton $A$
+(on 38 states)
+and we want to verify that it accepts exactly 
+the normalizing $S$-terms.
+
+We need to check that 
+\begin{enumerate}
+\item \label{it:fa} 
+  $A$ is closed w.r.t. rewriting,
+\item \label{it:fb} 
+  $\CL(S)$ is locally terminating on $\Lang(A)$,
+\item \label{it:fc} 
+  each tree in $\Term(\Sigma)\setminus\Lang(A)$
+  contains a redex.
+\end{enumerate}
+It is easy to do check items \ref{it:fa} and \ref{it:fc}
+by inspection. The challenge is item \ref{it:fb}.
+For that, we construct a TRS $F$ 
+by labelling rules of $\CL(S)$ with states of $A$, obtaining
+\url{https://github.com/jwaldmann/s/blob/master/full.trs}
+
+\emph{Challenge:} Prove termination of $F$. 
+(has approx. 2000 rules)
+
+
+\emph{Status:} this can be solved at least by 
+\texttt{matchbox2014},
+using DP transformation, EDG decomposition,
+and matrix interpretations (dimension at most 2),
+producing a termination proof that can be verified by 
+\texttt{CeTA}.
+
+\section{Innermost Derivational Complexity}
+
+\emph{Motivation}: We have conjecture (1998) 
+that $\CL(S)$ has quadratic innermost derivational complexity
+\cite{DBLP:conf/flops/AvanziniM08}
+on the normalizing terms.
+
+\emph{Challenge}: prove quadratic
+innnermost derivational complexity for TRS $F$
+from previous challenge.
+
+\emph{Status}: (open)
+
+\section{Termination of Context-Sensitive Rewriting}
+
+\emph{Motivation}:
+We have a deterministic complete tree automaton $B$
+(on 35 states)
+and we want to verify that it accepts 
+exactly the head-normalizing $S$-terms.
+
+We need to check that 
+\begin{enumerate}
+\item \label{it:ha} 
+  $B$ is closed w.r.t. head rewriting,
+\item \label{it:hb} 
+  $\CL(S)$ is locally terminating on $\Lang(B)$
+  for head reductions
+\item \label{it:hc} 
+  each tree in $\Term(\Sigma)\setminus\Lang(B)$
+  contains a head redex.
+\end{enumerate}
+It is again easy to do check 
+items \ref{it:ha} and \ref{it:hc}
+by inspection. The challenge is item \ref{it:hb}.
+For that, we construct a TRS $H$ by labelling rules
+of $\CL(S)$ with states of $B$, obtaining
+\url{https://github.com/jwaldmann/s/blob/master/head.trs}
+
+Since the focus is termination of head reductions,
+we need to restrict the rewrite relation.
+This can be done with the model of
+\emph{context-sensitive rewriting}, 
+\cite{DBLP:journals/entcs/AlarconGIL07},
+and we declare
+only the left argument position of (labelled)
+application symbols as replacing position.
+
+\emph{Challenge}: prove context-sensitive termination
+of $H$ (8000 rules).
+
+\emph{Status}: (open)
+
+\section{Relative Top-Termination (Small)}
+
+\emph{Motivation}:
+We proved (pen-and-paper) that $\CL(S)$ is top-terminating.
+We want this proof obtained automatically, and verified.
+
+\emph{Challenge}: prove relative termination
+\[ \SN( \{A^\#(A(A(S,x),y),z)\to A^\#(A(x,z),A(y,z)) \},
+\{ A(A(A(S,x),y),z)\to A(A(x,z),A(y,z)) \} ) 
+\]
+\emph{Remark}: since the $A^\#$ symbol only occurs
+at the very top, this is actually 
+a dependency pairs problem
+\cite{DBLP:journals/tcs/ArtsG00}
+and some of the solvers might use this fact.
+
+\emph{Status}: (open)
+
+\section{Relative Top-Termination}
+
+\emph{Motivation} Referring to the previous problem,
+it may be good to help the solver
+by semantic labelling, e.g., using the automaton $B$.
+
+\emph{Challenge}: prove relative termination
+of the labelled system.
+
+\emph{Status}: (open)
+
+\section{Discussion}
+
+Hardness of these challenges is primarily 
+in the sheer size of these systems (thousands of rules).
+We believe this is a good test case for other
+applications of automated termination and complexity
+analyzers. Application problems might lead to
+termination problems that are quite different
+from the ``crafted'' problems 
+that constitute the bulk of TPDB today.
+In particular, they may be large, but could be solved 
+by a combination of easy steps --- but a large number 
+of them (as in matchboxes' answer to the first challenge).
+We note that other solver competitions (e.g., SAT) 
+have a separation in crafted, random,
+and application problems---so these communities
+also think that these categories pose different challenges
+to solvers, and each is worth pursuing.
+
+\bibliographystyle{alpha}
+\bibliography{challenge}
+
+
+\end{document}
+
