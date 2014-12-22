@@ -9,6 +9,7 @@ module Tab.Opt where
 import Tab.Exp
 import Tab.Bin (from)  
 
+import qualified Data.Map as M
 import Control.Monad
 import System.Random
 import Data.Function (on)
@@ -24,20 +25,20 @@ data Form = Form { geno :: [ Bool ]
 
 bad = 1000
 
-work n target bitsize popsize = do
-    fs <- replicateM popsize $ roll n target bitsize
+work target bitsize popsize = do
+    fs <- replicateM popsize $ roll target bitsize
     let handle mbest fs = do
-            let w = 20 :: Int
+            let w = 5 :: Int
             fs' <- permute w fs
             let (gs,hs) = splitAt w fs'
             children <- replicateM w $ do
               f:g:_ <- permute (2::Int) gs
               m <- cross2 (geno f) (geno g)
               m <- mutate m
-              return $ form n target m
+              return $ form target m
             let part = take w
                      $ sortBy (compare `on` penalty)
-                     $ children -- ++ gs
+                     $ children ++ gs
                 p = head part
                 (printing, mbest') = case mbest of
                     Nothing -> (True, Just $ penalty p)
@@ -71,23 +72,24 @@ permute k xs = do
     ys <- permute (k-1) $ pre ++ post
     return $ this : ys
     
-roll n target s = do
+roll target s = do
     bits <- replicateM s $ randomRIO (False,True)
-    return $ form n target bits
+    return $ form target bits
     
-form :: Int
-     -> ( (Int,Int) -> Int )
+form :: ( M.Map (Int,Int) Int )
      -> [Bool]
      -> Form
-form n target bits =
-    let e = Tab.Bin.from n bits
+form target bits =
+    let e = Tab.Bin.from target bits
         f = value e
+        n = succ $ maximum $ M.elems target
         p = sum $ do
            x <- [ 0 .. n-1 ]
            y <- [ 0 .. n-1 ]
            return $ signum
-                  $ abs $ f (x,y) - target (x,y)
+                  $ abs $ f (x,y) - target M.! (x,y)
     in  Form { geno = bits, pheno = e
-             , penalty = if p > 0 then p + bad else  size e
+             , penalty = -- if p > 0 then error "huh" else
+                         size e
              }
     

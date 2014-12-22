@@ -1,11 +1,11 @@
 import Tab.Exp
+import Tab.Bin (from)
 import Tab.Opt       
 
 import qualified S.Table as ST
 import qualified Data.Map as M      
 
+target = ST.complete $ ST.trans
+
 main = do
-    let m = ST.complete $ ST.trans
-        n = 39
-        target (x,y) = mod (m M.! (x,y)) n
-    work n target 100 100
+    work target 100 100

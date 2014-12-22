@@ -25,6 +25,8 @@ data Pos = X | Y
 instance Show Exp where show = show . pretty
 instance Show Pos where show = show . pretty
 
+get :: Pos -> (a,a) -> a
+get X (x,y) = x ; get Y (x,y) = y
      
 value :: Exp -> (Int,Int) -> Int
 value e (x,y) = case e of
