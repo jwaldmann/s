@@ -9,6 +9,7 @@ instance Read T where
 
 term =  do charskip 's' ; return s
     +++ do charskip 't' ; return t
+    +++ do charskip 'b' ; return b
     +++ do charskip 'a' ; return a
     +++ do i <- natural ; return $ var i 
     +++ parens ( fmap unspine $ many term )
