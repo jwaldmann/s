@@ -9,16 +9,19 @@ import Text.Parsec
 import Control.Applicative ((<*>),(<$>))
 import Control.Monad ( guard )
 
-import qualified Data.Map as M
+import qualified Data.Map.Strict as M
 import qualified Data.Set as S
-import Data.List ( nub )
+import Data.List ( nub, sortBy, groupBy )
+import Data.Function (on)
 
+import Control.Parallel.Strategies       
+              
 type Table = M.Map (Int,Int) Int
 
 from :: Table -> [ Bool ] -> Exp
 from tab s = case parse (exp tab) "bin" s of
     Right e -> e
-
+    
 exp tab = case nub $ M.elems tab of
     [] -> return $ Const (-42)
     [ c ] -> return $ Const c
@@ -27,13 +30,24 @@ exp tab = case nub $ M.elems tab of
               p <- [X, Y]
               let is = nub $ map (get p) $ M.keys tab
               guard $ length is > 1
-              return (p, is)
+              let js = id
+                     -- $ head $ groupBy ( (==) `on` third )
+                     -- $ sortBy (compare `on` third )
+                     -- $ ( \ xs -> xs `using` parBuffer 8 (evalTuple3 rseq rseq rseq) )
+                     $ do
+                    i <- is
+                    let prop = \ k v -> get p k == i
+                        (yeah,noh) = M.partitionWithKey prop tab
+                        d = (+) (diversity yeah) (diversity noh)
+                    return (i, (yeah,noh), d)
+              return (p, js)
         (p, is) <- pick candidates
-        i <- pick is
-        let prop = \ k -> get p k == i
-        IfEq p i <$> exp (M.filterWithKey (const . prop) tab)
-                 <*> exp (M.filterWithKey (const . not . prop) tab)
+        (i, (yeah,noh), d) <- pick is
+        IfEq p i <$> exp yeah <*> exp noh
 
+third (x,y,z) = z    
+diversity tab = S.size $ S.fromList $ M.elems tab
+    
 pick xs = (xs !!) <$> number (length xs)
 
 position = (toEnum :: Int -> Pos) <$> number 2
@@ -42,7 +56,7 @@ position = (toEnum :: Int -> Pos) <$> number 2
 number 1 = return 0
 number n | n > 1 = do
     b <- next
-    x <- number $ div n 2
+    x <- number $ div (succ n) 2
     return $ mod ( 2*x + fromEnum b ) n
 
 next = tokenPrim

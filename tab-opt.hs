@@ -8,4 +8,4 @@ import qualified Data.Map as M
 target = ST.complete $ ST.trans
 
 main = do
-    work target 100 100
+    work target 1000 1000

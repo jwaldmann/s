@@ -17,7 +17,7 @@ data Exp = Const Int
 size :: Exp -> Int
 size x = case x of
     IfEq _ _ l r -> 1 + size l + size r
-    _ -> 1
+    _ -> 0
      
 data Pos = X | Y
     deriving Enum
@@ -39,7 +39,7 @@ value e (x,y) = case e of
 instance Pretty Exp where
     pretty x = case x of
         Const i -> pretty i
-        IfEq p i l r -> vcat
+        IfEq p i l r -> group $ vcat
             [ "if" <+> pretty p <+> "==" <+> pretty i
             , "then" <+> align (pretty l)
             , "else" <+> align (pretty r)

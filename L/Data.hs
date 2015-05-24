@@ -23,6 +23,10 @@ var i = Var i
 app f a = App { _hash = hash (f,a) , _size = size f + size a, fun = f, arg = a }
 lam b = Lam { _hash = hash (42 :: Int,b) , _size = 1 + size b , body = b }
 
+varmap g t = case t of
+  Var i -> var (g i)
+  App {fun = f, arg = a} -> app (varmap g f) (varmap g a)
+
 the_s = lam $ lam $ lam $ app (app (var 2) (var 0)) (app (var 1) (var 0))
 
 -- | J = \ a b c d -> a b (a d c)  = (4 3) (4 1 2)

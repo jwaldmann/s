@@ -12,7 +12,7 @@ instance ToDoc L where
         this:rest ->   
             parens $ align $ fillSep 
             $ single this 
-            : brackets (toDoc (length rest)) 
+            -- : brackets (toDoc (length rest)) 
             : map toDoc rest
 
 single t = case t of

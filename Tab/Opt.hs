@@ -15,8 +15,7 @@ import System.Random
 import Data.Function (on)
 import Data.List (sortBy)
 import System.IO
-       
-       
+
 data Form = Form { geno :: [ Bool ]
                  , pheno :: Exp
                  , penalty :: Int
@@ -28,13 +27,16 @@ bad = 1000
 work target bitsize popsize = do
     fs <- replicateM popsize $ roll target bitsize
     let handle mbest fs = do
-            let w = 5 :: Int
+            let w = 10 :: Int
             fs' <- permute w fs
             let (gs,hs) = splitAt w fs'
-            children <- replicateM w $ do
-              f:g:_ <- permute (2::Int) gs
-              m <- cross2 (geno f) (geno g)
+            children <- replicateM (w*w) $ do
+              f:g:h:i:_ <- permute (4::Int) gs
+              fg <- cross2 (geno f) (geno g)
+              hi <- cross2 (geno h) (geno i)
+              m <- cross2 fg hi
               m <- mutate m
+              m <- mutate m    
               return $ form target m
             let part = take w
                      $ sortBy (compare `on` penalty)
@@ -46,7 +48,7 @@ work target bitsize popsize = do
                       ( penalty p < best
                       , Just $ min best $ penalty p )
             when printing $ print p
-            -- hPutStr stderr $ show (penalty p) ++ " "
+            hPutStr stderr $ show (penalty p) ++ " "
             handle mbest' $ part ++ hs            
     handle Nothing fs
 
