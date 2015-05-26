@@ -10,6 +10,7 @@ module L.Type
 where
 
 import L.Data
+import L.Read
 import L.Print
 import qualified S.Type as S
 

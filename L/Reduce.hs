@@ -49,6 +49,19 @@ next_omo t = here t ++ ( case t of
      _ -> [] 
     ) 
 
+hd ::  L -> [L]
+hd t = t : case next_hd t of
+    [] -> []
+    s : _ -> omo s
+
+next_hd :: L -> [L]
+next_hd t = here t ++ ( case t of
+     App {fun=f,arg=a} -> map (\a'-> app f a') (next_omo a)
+     Lam {body=b} -> map lam $ next_hd b
+     _ -> [] 
+    ) 
+
+
 here :: L -> [L]
 here t = case t of
     App {fun=App{fun=App{fun=f,arg=x},arg=y},arg=z} | f == the_s ->

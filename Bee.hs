@@ -1,4 +1,4 @@
-import L.Reduce (imo)
+import L.Reduce (imo, omo, hd)
 import L.Type 
 import S.Data (terms_for, T(..))
 import qualified Data.Map.Strict as M
@@ -17,7 +17,8 @@ main1 = do
   let ds = map absdepth $ path $ bee $ read k
   mapM_ print $ increasing $ zip ds $ map negate [0..]
 
-nf = last . imo
+-- nf = last . imo
+nf = last . hd
 
 up k x =
   if k > 1
@@ -35,16 +36,16 @@ increasing (x:xs) = x :increasing (filter (>x) xs)
 
 main2 = do
   [n] <- getArgs
-  print $ represent $ rightspine $ read n
+  mapM_ print $ representations $ rightspine $ read n
 
-represent t = head $ do
+representations t = do
   s <- concat $ terms_for [B]
-  guard $ t == ( nf $ froms  s)
+  guard $ t == core ( nf $ froms  s)
   return (s,t)
 
 rightspine k =
-  let b = foldr app (var 0) $ map var $ reverse [ 1 .. k -1 ]
-  in  iterate lam b !! k
+  foldr app (var 0) $ map var $ reverse [ 1 .. k -1 ]
+
 
 not_representable s = do
   let c = S.fromList $ do k <- [ 1.. s] ; candidates k

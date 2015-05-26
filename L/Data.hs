@@ -19,6 +19,10 @@ absdepth t = case t of
   Lam {body = b} -> succ $ absdepth b
   _ -> 0
 
+core t = case t of
+  Lam {body = b} -> core b
+  _ -> t
+
 var i = Var i
 app f a = App { _hash = hash (f,a) , _size = size f + size a, fun = f, arg = a }
 lam b = Lam { _hash = hash (42 :: Int,b) , _size = 1 + size b , body = b }
